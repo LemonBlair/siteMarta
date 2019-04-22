@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<!-- Check button y radio button -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <form>
+      <p>Elige tu animal mitológico:</p>
+      <label for="azul"><input type="checkbox" id= "azul" name="Gatos" value="true" required checked> Gatos <br>
+        <!-- si se añade el atributo "requiered", no dejará enviar ese formulario si el input que lo contiene no está seleccionado-->
+      <label for="rojo"><input type="checkbox" id= "rojo" name="Patos" value="true"> Patos <br>
+        <!-- si se añade el atributo "checked" (sin igual ni ostias) se queda marcado por defecto-->
+      <label for="verde"><input type="checkbox" id= "verde" name="Señores" value="true"> Señores grandes con perros enanos <br>
+      <br>
+      <input type="submit"> <br>
+      <br>
+      <!-- Label for="id" permite que al tocar la etiqueta (el texto) también se active el checkbox-->
+      <!-- Envia el name, no el texto que tiene al lado el cuadrado -->
+      <p>Elige su compañero múrido:</p>
+      <label for="amarillo"><input type="radio" id= "amarillo" name="radio" value="Ratones" checked> Ratones <br>
+      <label for="morado"><input type="radio" id= "morado" name="radio" value="Ratoncitos"> Ratoncitos <br>
+      <label for="naranja"><input type="radio" id= "naranja" name="radio" value="Fracderatones"> Fracción de ratones <br>
+      <!-- para que el boton "radio" sea de eleccion unica (solo uno entre las opciones) todos tienen que tener el mismo nombre
+        ya que es lo que se envía. Lo que cambia es el value, el name indica a dónde se envía el contenido del value -->
+      <br>
+      <input type="submit">
+    </form>
+  </body>
+  <style>
+
+  </style>
+</html>

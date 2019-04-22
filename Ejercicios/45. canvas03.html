@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body onload="dibujar()">
+    <canvas id="canvas_id" width="1000" height="1000">¡¡¡Su navegador no es compatible!!!</canvas>
+
+    <script type="text/javascript">
+
+      function retornarLienzo(x){
+        var canvas = document.getElementById(x);
+        if (canvas.getContext){
+          var lienzo = canvas.getContext("2d");
+          return lienzo;
+        } else {
+          return false;
+        }
+      }
+
+      function dibujar(){
+        var lienzo = retornarLienzo("canvas_id");
+        if (lienzo){
+
+/* Construyo un cuadrado de cuatro cuadrados alternantes:
+ * negro y blanco arriba y blanco y negro abajo, y lo repito a lo largo
+ * de la superficie que he marcado como máxima (1000x1000)*/
+
+          for(a=0; a<1000; a=a+250){ /* Eje x: a=a+250 --> como tengo dos cuadrados, quiero que salte a la distancia de dos cuadrados*/
+            for(b=0; b<1000; b=b+250){ /*Eje y: b=b+250 --> lo mismo, porque tambien tengo dos cuadrados de alto */
+              lienzo.fillStyle="rgb(0,0,0)";
+              lienzo.fillRect(a,b,125,125); /*eje x, eje y, ancho y largo*/
+              lienzo.fillStyle="rgb(255,255,255)";
+              lienzo.fillRect(a+125,b,125,125); /* El blanco tiene que ir 125px despues del negro, es decir, pegado a él*/
+              lienzo.fillStyle=("rgb(255,255,255)");
+              lienzo.fillRect(a, b+125,125,125); /*los de abajo tienen b+125 para estar debajo*/
+              lienzo.fillStyle="rgb(0,0,0)";
+              lienzo.fillRect(a+125,b+125,125,125);
+
+            }
+          }
+        }
+      }
+
+    </script>
+  </body>
+</html>

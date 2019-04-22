@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body onload="dibujar()">
+      <canvas id="lienzo1" width="400" height="300">¡¡¡Su navegador no es compatible!!!</canvas>
+      <script type="text/javascript">
+
+        function retornarLienzo(x){
+          var canvas = document.getElementById(x);
+          if (canvas.getContext){
+            /*alert("B");
+            alert(x);*/
+            var lienzo = canvas.getContext("2d");
+            return lienzo;
+          } else {
+            return false;
+          }
+        }
+
+        function dibujar(){
+          var lienzo = retornarLienzo("lienzo1");
+          /*contiene el canvas.getContext("2d") o el false*/
+          if (lienzo){
+            /*alert("A");
+            alert(lienzo);*/
+            /*lienzo.fillStyle="lightblue";*/
+            /*establece color de relleno de lo que vayamos a dibujar*/
+            //lienzo.fillRect(10,10,100,100); /* x0, y0, xi, yi*/
+
+            /* Circunferencia
+            lienzo.beginPath();
+            lienzo.arc(100, 75, 50, 2 * Math.PI, Math.PI);
+            lienzo.stroke();*/
+
+            /*lienzo.strokeStyle="rgb(200,0,0)";
+            lienzo.beginPath();
+              for (a=0; a<100; a=a+10){
+                lienzo.moveTo(a,0);
+                lienzo.lineTo(a,500);
+              }
+            lienzo.moveTo(0,0);
+            lienzo.lineTo(150,300);
+            lienzo.lineTo(300,0);
+            lienzo.stroke();*/
+
+            /*beginPath al principio y stroke al final son necesarios si se trata de una trayectoria
+            con inicio y final. En el caso de los rectángulos no es necesario, pero sí en circunferencias y líneas rectas*/
+
+            lienzo.strokeStyle="rgb(200,0,0)";
+            lienzo.strokeRect(100,100,300,300);
+            lienzo.stroke();
+
+            /*lienzo.fillStyle="rgb(200,0,0)";
+            lienzo.fillRect(200,200,400,400);*/
+          }
+        }
+      </script>
+  </body>
+  <style media="screen">
+    #lienzo1{
+      background-color: teal;
+    }
+  </style>
+</html>

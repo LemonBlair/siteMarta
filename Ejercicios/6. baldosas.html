@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div>
+
+    </div>
+  </body>
+  <style>
+    div{
+      position: absolute;
+      width: 106px;
+      height: 106px;
+      background-image: url("../Images/tileset.jpg");
+      background-position: 0 0;
+      transition: background-position 0.3s, height 3s;
+      /*transition-timing-function: cubic-bezier(1, 0.12, 0, 1);*/
+      /*con esto defino la velocidad a la que sucede la transicion*/
+    }
+    div:hover{
+      /*position: absolute;
+      background-image: url("./Images/tileset.jpg");*/
+      background-position: -106.25px 0px;
+      /*primer hueco: con - avanza en la plantilla, con positivos retrocede*/
+      width: 212.5px;
+      height: 212.5px;
+    }
+    div:active{
+      position: absolute;
+      background-image: url("../Images/tileset.jpg");
+      background-position: 212.5px 0px;
+    }
+  </style>
+</html>

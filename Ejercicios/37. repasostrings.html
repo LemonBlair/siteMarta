@@ -1,0 +1,20 @@
+<!-- Que el usuario introduzca una frase. Luego una letra. Se le muestra en pantalla
+cuantas veces aparece esa letra en la frase. -->
+
+<script type="text/javascript">
+
+    var contador=0;
+    var cadena = prompt("Introduzca una frase:","");
+    var letra = prompt("Introduzca la letra que se desea buscar:","");
+    var dondeletra = cadena.indexOf(letra);
+    var longitud = cadena.length;
+    if (dondeletra != -1){
+      for (a=0; a<=longitud-1; a++){
+        if (cadena.charAt(a) == letra){
+          contador=contador+1;
+        }
+      }
+      alert("La letra '" +letra+ "' aparece " +contador+ " veces.");
+    }
+
+</script>

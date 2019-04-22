@@ -1,0 +1,30 @@
+
+<div id="capa">
+
+</div>
+<style>
+  #capa{
+    position: relative;
+    width: 100px;
+    height: 300px;
+    background-color: grey;
+  }
+  #capa div{
+    position: relative;
+    width: 30px;
+    height: 30px;
+    margin-top: 5px;
+    margin-left: 5px;
+    float: left;
+    background-color: red;
+  }
+</style>
+
+<!-- innerHTML elimina todo lo que hubiera antes. write no sobreescribe -->
+<script type="text/javascript">
+  var contenido = "";
+  for(a=0; a<9; a++){
+    contenido = contenido + "<div></div>";
+  }
+  document.getElementById("capa").innerHTML=contenido;
+</script>

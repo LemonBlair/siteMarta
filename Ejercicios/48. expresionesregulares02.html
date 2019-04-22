@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      var frase= prompt('Ingrese un número negativo. Así de simple.',"");
+      var patron = new RegExp('^-[0-9]');
+      /* Solo tendrá en cuenta que empiece con un menos y un número, lo demás le dará igual*/
+      if (patron.test(frase)) {
+        alert("Todo bien, todo correcto.");
+      } else {
+        alert("¿Hola? Eso no es un número negativo.");
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,19 @@
+<form action="" method="get" onsubmit="seleccion()">
+  <select id="sel" name="sel">
+    <option value="value1">text1</option>
+    <option value="value2">text2</option>
+    <option value="value3">text3</option>
+  </select>
+  <input type="submit" name="" value="Submit">
+</form>
+<script type="text/javascript">
+  function seleccion(){
+    var ind=document.getElementById("sel").selectedIndex;
+    var a= document.getElementById('sel').style;
+    a.color="red";
+    alert(ind);
+  }
+</script>
+<!-- Esta función busca en los elementos del select por su posicion. Más completo
+  en eventos 03. Aquí el único cambio es que la función se activa al enviar el
+  formulario -->

@@ -1,0 +1,60 @@
+<html>
+  <head>
+
+  </head>
+
+  <body>
+
+    <header>
+      <nav>
+        <ul>
+          <a href="./index.html" class= "boton"><li class= "botonMenuActivo">Opción 1</li></a>
+          <a href="#" class= "boton"><li class= "botonMenu">Opción 2</li></a>
+          <a href="#" class= "boton"><li class= "botonMenu">Opción 3</li></a>
+          <a href="#" class= "boton" id= "op4"><li class= "botonMenu">Opción 4</li></a>
+            <ul class= "desplegable">
+              <li>Contenido 1</li>
+              <li>Contenido 2</li>
+              <li>Contenido 3</li>
+            </ul>
+          </ul>
+        </nav>
+      </header>
+
+      <style media="screen">
+
+        ul{
+          list-style:none;
+          padding:0px;
+        }
+        .boton{
+          background-color: lightblue;
+          display: inline;
+          float:left;
+          height: 50px;
+          margin-right: 5px;
+          padding: 0px 20px 0px 20px;
+          border-radius: 10px;
+          box-shadow: 5px 5px 3px grey;
+          font-family: sans-serif;
+          font-weight: bold;
+          border: 1px solid blue;
+        }
+        .botonMenu{
+          position: relative;
+          top: 17px;
+          text-decoration: none;
+        }
+        .botonMenuActivo{
+          position: relative;
+          top: 17px;
+          text-decoration: none;
+        }
+        .desplegable{
+          display: none;
+        }
+        #op4:hover ~ .desplegable{
+          display:inline;
+          color: darkblue;
+        }
+      </style>

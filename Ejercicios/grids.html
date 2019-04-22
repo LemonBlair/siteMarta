@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div id="contenedor">
+      <div id="header">
+
+      </div>
+      <div id="aside">
+
+      </div>
+      <div id="main">
+
+      </div>
+      <div id="footer">
+
+      </div>
+    </div>
+  </body>
+  <style media="screen">
+    #contenedor{
+      width: 500px;
+      height: 500px;
+      display: grid;
+      grid-template-columns: repeat (4, 1fr);
+      grid-template-rows: 125px 125px 125px 125px;
+      grid-template-areas:
+        "header header header header"
+        "aside main main main"
+        "aside main main main"
+        "footer footer footer footer";
+      background-color: blue;
+    }
+    #header{
+      grid-area: header;
+      background-color: teal;
+      display: flex;
+    }
+    #aside{
+      grid-area: aside;
+      background-color: lightblue;
+    }
+    #main{
+      grid-area: main;
+      background-color: midnightblue;
+    }
+    #footer{
+      grid-area: footer;
+      background-color: teal;
+    }
+  </style>
+</html>
+<!-- flex-basis: 50vw;
+flex-grow: 1;
+flex-shrink: 1; -->

@@ -1,0 +1,66 @@
+<!-- array, coleccion, matriz, arreglo, vector -->
+
+<!-- array unidimensional-->
+
+<!--
+var array = new Array(3);
+array[0]="Pepe";
+array[1]="Luisa";
+array[2]="Laura";
+ -->
+
+<!-- array multidimensional-->
+<!--
+var subArray = new Array();
+miArray[1]=subArray();
+
+<!--Ejercicio -->
+
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <!-- Torrecilla, el onLoad en el body, por favor -->
+  <body onLoad="cargarArray()">
+
+    <div id="id_div">
+
+    </div>
+
+    <script type="text/javascript">
+
+      function cargarArray(){
+
+        var miArray = new Array();
+        miArray[0]="Perros";
+        miArray[1]="Gatos";
+        miArray[2]="Patos";
+        miArray[3]="Cerdos vietnamitas";
+        miArray[4]="Conejos gigantes de Nueva Zelanda";
+        miArray[5]="Otros";
+
+        document.getElementById("id_div").innerHTML = miArray;
+        /* Devuelve el array como cadena de texto separada por comas. Para poder obtener
+        el array de nuevo, tendríamos que aplicar la función .split. */
+
+        var miCadena = "Guau,Miau,Cuak,Oink,¿Qué hacen los conejos?,Otros";
+        var dosArray = miCadena.split(",");
+        alert("El elemento nº 2 del array es: " +dosArray[2]);
+        alert("La longitud del array es: " +dosArray.length);
+        var a=0;
+        while(dosArray[a]){
+          alert("Método while: " +dosArray[a]);
+          a++;
+        }
+        var b = dosArray.length;
+        for (i=0; i<b; i++){
+          alert("Método for: " +dosArray[i]);
+        }
+      }
+
+    </script>
+
+  </body>
+</html>

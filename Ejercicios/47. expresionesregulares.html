@@ -1,0 +1,38 @@
+<!-- Expresiones regulares - patrones/reglas que marcamosy que comprobaremos si una cadena de caracteres los contiene -->
+
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      var frase= prompt('ingrese un nº de tres dígitos, entero y positivo;',"");
+      var patron = new RegExp('^[0-9]{3}$');
+      /* ^ --> la cadena debe comenzar con este patrón, búsca al comienzo
+       * $ --> la cadena tiene que terminar con este patrón, busca al final
+       * si ponemos ^ al principio y $ al final, acotamos la cadena al patrón
+       * (es decir, la cadena al completo tiene que ser ese patrón)
+       * {3} --> número de caracteres que tiene que tener la cadena, en este caso, 3.
+       * {7,} --> al menos 7
+       * {7,10} --> entre 7 y 10
+       * ? --> {0,1}
+       * * --> {0,} --> Ex: [0-9]{1,2}* --> esto significa que tiene que haber un numero o dos del cero al nueve y después nada o cualquier cosa
+       * + --> {1,}
+       * \d --> [0-9]
+       * \D --> [^0-9]
+       * \w --> [a-zA-Z0-9]
+       * \W --> [^a-zA-Z0-9]
+       * [0-9] --> caracteres permitidos. Si están seguidos en la tabla ansi, se ponen del primero al último
+       * separados con guión [a-zA-z0-9] para varios grupos de caracteres
+       * los caracteres que la expresión regular utiliza para definir (corchetes, llaves, operadores...) serán ignorados a menos
+       * que se lo especifiquemos con \. También son hay que especificar espacios y saltos de carro */
+      if (patron.test(frase)) { /*prueba si las reglas definidas en patron existen en frase*/
+        alert("Todo bien, todo correcto.");
+      } else {
+        alert("¿Hola? Eso no es un número de tres dígitos entero y positivo.");
+      }
+    </script>
+  </body>
+</html>

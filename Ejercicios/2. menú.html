@@ -1,0 +1,72 @@
+<html>
+  <head>
+
+  </head>
+
+  <body>
+
+    <header>
+      <nav>
+        <ul>
+          <!-- botonMenuActivo es la clase con los cambios que indican en qué
+          página estamos de las del menú. Habría que hacerlo en cada página -->
+          <!--<a href="./index.html"><li class= "botonMenuActivo">Opción 1</li></a>
+          esto serviría para que al pinchar en cualquier sitio del botón,
+          y no solo en las letras, te llevara al enlace-->
+          <li class= "botonMenuActivo"> <a href="./index.html"> Opción 1 </a></li>
+          <li class= "botonMenu"> <a href="#"> Opción 2 </a></li>
+          <li class= "botonMenu"> <a href="#"> Opción 3 </a></li>
+          <li class= "botonMenu" id= "op4"> <a href="#"> Opción 4 </a>
+            <ul id= "cont">
+              <li>Contenido 1</li>
+              <li>Contenido 2</li>
+              <li>Contenido 3</li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <style media="screen">
+      ul{
+        list-style:none;
+        padding:0px;
+      }
+      ul li{
+        background-color: lightblue;
+        display: inline;
+        float:left;
+        height: 50px;
+        margin-right: 5px;
+        padding: 0px 20px 0px 20px;
+        border-radius: 10px;
+        box-shadow: 5px 5px 3px grey;
+        font-family: sans-serif;
+        font-weight: bold;
+        border: 1px solid blue;
+      }
+      ul a{
+        position: relative;
+        top: 17px;
+        text-decoration: none;
+      }
+      #cont{
+        display: none;
+      }
+      #op4:hover #cont{
+        display:inline;
+        color: darkblue;
+      }
+
+
+    </style>
+
+
+  </body>
+
+
+
+
+
+
+</html>

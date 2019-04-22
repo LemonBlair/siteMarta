@@ -1,0 +1,18 @@
+<script type="text/javascript">
+  /* Comprueba que exista un canvas. Se llama desde las funciones que usaremos para dibujar */
+  function retornarLienzo(x){
+    var canvas = document.getElementById(x);
+    if (canvas.getContext()){
+      var lienzo = canvas.getContext("2d");
+      return lienzo;
+    } else {
+      return false;
+    }
+  }
+</script>
+
+<!-- DOM Modelo de objetos de documento. Cada elemento del documento es
+  un objeto en html -->
+  <!-- x: id del canvas
+    si podemos acceder al metodo getContext es que es un canvas (el navegador lo reconoce)
+    y la función prosigue (se dibuja). En caso contrario, deja de correr -->

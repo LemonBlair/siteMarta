@@ -1,0 +1,67 @@
+
+<form onsubmit="Fecha()">
+  <input type="date" id="diadehoy" name="fecha" value="fecha">
+  <input type="submit" name="submit" value="Enviar">
+</form>
+
+<script type="text/javascript">
+  function Fecha(fecha){
+
+    mesArray = new Array();
+    mesArray[0] = "enero";
+    mesArray[1] = "febrero";
+    mesArray[2] = "marzo";
+    mesArray[3] = "abril";
+    mesArray[4] = "mayo";
+    mesArray[5] = "junio";
+    mesArray[6] = "julio";
+    mesArray[7] = "agosto";
+    mesArray[8] = "septiembre";
+    mesArray[9] = "octubre";
+    mesArray[10] = "noviembre";
+    mesArray[11] = "diciembre";
+
+    var fecha;
+    /* versión 1 - introducir directamente en new Date el valor del type=date
+    * fecha=document.getElementById("diadehoy");
+    * alert(fecha);
+    * nuevafecha=new Date(fecha.value);
+    * alert("Nueva fecha" +nuevafecha);
+    */
+
+    fecha=document.getElementById("diadehoy").value;
+
+    /* versión 2 - partir a mano lo que devuelve el type=date
+
+    * alert("La fecha que hay dentro del input type=date es: " +fecha);
+    * var año=fecha.substring(0,4);
+    * alert("El año es: " +año);
+    * var mes=fecha.substring(5,7);
+    * alert("El mes es: " +mes);
+    * var dia=fecha.substring(8,10);
+    * alert("El día es: " +dia);
+    * var mesreal=mes-1;
+    * alert(mesreal);
+    * nuevafecha=new Date(año, mesreal, dia);
+    */
+
+    /* versión 3 - hacer un split con el caracter "-" y darle las tres partes
+    * por separado a new Date
+    */
+
+    var componentes = fecha.split("-");
+    nuevafecha=new Date(componentes[0], (componentes[1]-1), componentes[2]);
+    alert("He fijado la fecha en: " +nuevafecha);
+
+  /* version 4 - sacar el mes usando el numero como indice del array de meses */
+    alert("Hoy es " +nuevafecha.getDate() + " de " + mesArray[nuevafecha.getMonth()] + " de " +nuevafecha.getFullYear()+ ".");
+
+    /*  var newfecha= nuevafecha.getDate() + "-" + (nuevafecha.getMonth()+1) + "-" + nuevafecha.getFullYear(); */
+    /*var newnewfecha= dia + "-" + mes + "-" + año;
+    alert("La fecha uniendo los datos es: " +newnewfecha);*/
+
+
+  }
+
+
+</script>

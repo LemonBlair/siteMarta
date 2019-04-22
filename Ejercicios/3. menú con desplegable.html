@@ -1,0 +1,79 @@
+<html>
+  <head>
+
+  </head>
+
+  <body>
+
+    <header>
+      <nav>
+        <ul>
+          <li class= "botonMenuActivo"> <a href="./index.html" class= "boton"> Opción 1 </a></li>
+          <li class= "botonMenu"> <a href="#" class= "boton"> Opción 2 </a></li>
+          <li class= "botonMenu"> <a href="#" class= "boton"> Opción 3 </a></li>
+          <li class= "botonMenu" id= "op4"> <a href="#" class= "boton" > Opción 4 </a>
+            <ul class= "desplegable">
+              <li><a href="http://www.google.com"> Contenido 1 </a></li>
+              <li><a href="https://www.google.es/maps?hl=es&tab=wl"> Contenido 2 </a></li>
+              <li><a href="https://translate.google.es/?hl=es&tab=wT"> Contenido 3 </a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <style>
+      ul{
+        padding:0px;
+        list-style: none;
+      }
+      /* formato del boton externo */
+      .botonMenu{
+        background-color: lightblue;
+        display: inline;
+        float: left;
+        height: 50px;
+        margin-right: 5px;
+        padding: 0px 20px 0px 20px;
+        border-radius: 10px;
+        box-shadow: 5px 5px 3px grey;
+        font-family: sans-serif;
+        font-weight: bold;
+        border: 1px solid blue;
+      }
+      .botonMenuActivo{
+        background-color: red;
+        display: inline;
+        float: left;
+        height: 50px;
+        margin-right: 5px;
+        padding: 0px 20px 0px 20px;
+        border-radius: 10px;
+        box-shadow: 5px 5px 3px grey;
+        font-family: sans-serif;
+        font-weight: bold;
+        border: 1px solid blue;
+      }
+      .boton{
+        position: relative;
+        top: 17px;
+        text-decoration: none;
+        display:inline;
+      }
+      .desplegable{
+        position: absolute;
+        top: 120px;
+        display: none;
+        float:none;
+      }
+      #op4:hover .desplegable{
+        display:inline;
+        color: darkblue;
+        float: none !important;
+      }
+      #op4:hover{
+        box-shadow: 0px;
+      }
+
+
+    </style>

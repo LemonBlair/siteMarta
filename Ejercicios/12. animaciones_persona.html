@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <input type="button" id= "cats" name="cats" value="¡Anima al gatito!">
+    <label for="cats"></label>
+    <div id= "personaje">
+
+    </div>
+    <div id="fondo">
+
+    </div>
+    <div id="color">
+
+    </div>
+  </body>
+  <style>
+
+  #fondo{
+    position: absolute;
+    top: 50px;
+    left: 17px;
+    background-image: url('../Images/fondo_cats.jpg');
+    width: 92px;
+    height: 152px;
+    background-size: contain;
+    background-blend-mode: luminosity;
+
+    animation-name: fondo;
+    animation-duration: 10s;
+    animation-timing-function:linear;
+    animation-direction: normal;
+    animation-iteration-count: infinite;
+    animation-play-state: paused;
+  }
+
+  @keyframes fondo{
+    from{
+      background-position: 0 0;
+    }
+    to{
+      background-position: 0px -304px;
+      background-color: rgb(0, 15, 77);
+    }
+  }
+  #cats:focus + label + div + div{
+    animation-play-state: running;
+}
+
+/*Al darle al botón, se activa la animación del gato */
+
+  #cats:focus + label + div {
+    animation-play-state: running;
+  }
+    #personaje{
+      position: absolute;
+      background-image: url('../Images/cats_tileset01.png');
+      background-position: 0px 0px;
+      width: 45px;
+      height: 60px;
+      top: 100px;
+      left: 65px;
+      z-index: 100;
+
+      /*animation: cats 0.2s linear alternate infinite;*/
+      animation: cats 0.8s steps(3) infinite;
+      animation-play-state: paused;
+    }
+
+    @keyframes cats{
+    /*  from{
+        background-position: 0 0;
+      }
+      32%{
+        background-position: 0 0;
+      }
+      33%{
+        background-position: -45px 0px;
+      }
+      34%{
+        background-position: -45px 0px;
+      }
+      65%{
+        background-position: -45px 0px;
+      }
+      66%{
+        background-color: white;
+      }
+      67%{
+        background-position: -90px 0px;
+      }
+      99%{
+        background-position: -90px 0;
+      }
+      to{
+        background-position: 0 0;
+      }
+    }*/
+    100%{
+      background-position: -135px 0px;
+    }
+}
+  </style>
+</html>

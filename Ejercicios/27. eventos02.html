@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div id="capa" onmouseover="Mouseover()">
+
+    </div>
+    <div>
+      <input type="text" id="capa02" name="m" onfocus="Focus()" onblur="Blur()">
+    </div>
+    <div id="capa03" onmouseout="Mouseout()">
+
+    </div>
+  </body>
+  <script type="text/javascript">
+    var focused=false;
+    var blurred=false;
+    function Click(){
+      alert("Has hecho click. Qué malote.");
+    }
+    function Mouseover(){
+      alert("Has pasado el cursor por encima. Aburrido.");
+    }
+    function Focus(){
+      if (!focused){
+        focused=true;
+        alert("Deja de centrarte en mí. Me pones nervioso.");
+      }
+    }
+    function Blur(){
+      if (!blurred){
+        blurred=true;
+        alert("¿Por qué me ignoras? T_T");
+      }
+    }
+    function Mouseout(){
+      alert("¡No, no te vayas!");
+    }
+  </script>
+  <style media="screen">
+    #capa{
+      position: relative;
+      width: 100px;
+      height: 100px;
+      background-color: darkred;
+      float: left;
+    }
+    #capa02{
+      position: relative;
+      width: 100px;
+      height: 100px;
+      background-color: steelblue;
+      float: left;
+    }
+    #capa03{
+    position: relative;
+    width: 100px;
+    height: 100px;
+    background-color: mediumseagreen;
+    float: left;
+    }
+  </style>
+</html>

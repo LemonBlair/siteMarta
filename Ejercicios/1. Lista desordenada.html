@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+  <ul>
+    <li>opcion 1</li>
+    <li>opcion 2</li>
+    <li>opcion 3</li>
+    <li id= "op4">opcion 4
+      <ul id= "sub">
+        <li>sub 1</li>
+        <li>sub 2</li>
+        <li>sub 3</li>
+      </ul>
+    </li>
+  </ul>
+  <style media="screen">
+  /* de esta manera hacemos que las opciones ocultas de #sub aparezcan cuando
+  paso el cursor sobre #op4 */
+    #sub{
+      display: none;
+    }
+    #op4:hover #sub{
+        display: inline;
+      }
+    }
+  </style>
+</body>
+
+</html>

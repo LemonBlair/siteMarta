@@ -1,0 +1,29 @@
+<script type="text/javascript">
+
+  function funcion(){
+    var frase=document.getElementById("id_frase").value;
+    alert(frase);
+    var letra=document.getElementById("id_letra").value;
+    alert(letra);
+    var contador=-1;
+    var posicion=-1;
+    do{
+      posicion=frase.indexOf(letra, posicion+1);
+      contador++;
+    }
+    while (posicion!=-1);
+    alert("El número de veces que aparece la letra '" +letra+ "' es: " + contador);
+  }
+
+  /*Con este método, el contador sube uno más de lo que corresponde, porque no corta
+  justo cuando encuentra la última letra. Por eso, hay que restarle 1 al contador. Sin embargo, es un método más eficiente. */
+
+</script>
+
+<form onsubmit="funcion()">
+  Introduzca una frase:
+  <input type="text" id="id_frase">
+  Introduzca una letra:
+  <input type="text" id="id_letra">
+  <input type="submit" name="submit" value="Enviar">
+</form>

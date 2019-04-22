@@ -1,0 +1,19 @@
+{"Grupo":"Los vengadores",
+  "Ciudad":"New York",
+  "Base":"Torre Stark",
+  "Creación":"2012",
+  "Valoración":"9",
+  "miembros":
+    [
+      {
+      "Nombre": "Tony Stark",
+      "Identidad": "Iron Man"
+      },
+      {
+        "Nombre": "Bruce Banner",
+        "Identidad": "Hulk",
+        "Color":"verde botella",
+        "poderes":["muy feo", "muy grande","salta mucho","se acojonó con Thanos"]
+      }
+    ]
+}

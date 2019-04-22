@@ -1,0 +1,84 @@
+<html>
+	<head>
+
+	</head>
+
+
+	<body>
+
+		<div id= "capa1" class= "clasediv">
+
+			Capa 1
+
+		</div>
+
+		<div id= "capa2" class= "clasediv">
+
+			Capa 2
+
+		</div>
+
+		<div id= "capa3" class= "clasediv">
+
+			Capa 3
+
+		</div>
+
+		<div id= "capa4">
+
+			Capa 4
+
+		</div>
+
+		<div id= "capa5">
+
+			Capa 5
+
+		</div>
+
+	</body>
+	
+	<style>
+		.clasediv{
+			width: 400px;
+			height: 150px;
+			background-color: red;
+			margin-top: 20px;
+			}
+
+		#capa1{
+			position: absolute;
+			}
+
+		#capa2{
+			position: relative;
+			top: 170px;
+			}
+
+		#capa3{
+			position: absolute;
+			top: 340px;
+			}	
+		#capa4{
+			position: absolute;
+			width: 400px;
+			height: 3000px;
+			background-color: green;
+			}
+		#capa5{
+			position: fixed;
+			left: 450px;
+			top: 10px;
+			width: 100px;
+			height: 100px;
+			background-color: yellow;
+			}
+	</style>
+
+<!-- Nota 1: No puede haber espacio entre "px" y el nº de píxeles -->
+<!-- Nota 2: si pongo a la capa 2 la posicion abs y a la capa 1 la posicion rel, la capa 2 acaba debajo de la 1. relative ocupa el espacio, "eliminandolo" de los computos de las otras capas -->
+<!-- Nota 3: si pongo a la capa 2 la posicion abs y top: 170px, estará ahora debajo de la capa 3 -->
+<!-- Nota 4: si pongo la capa 2 en abs y las capas 1 y 3 en rel, con top: 340px; se salta un hueco -->
+<!-- Nota 5: es decir, al poner relative, el origen de coordenadas es la esquina superior izq de la capa anterior -->
+<!-- Nota 6: absolute no "ocupa" el espacio donde deberia ir sin marcar el top, pero relative sí, sigue estando ocupado -->
+</html>

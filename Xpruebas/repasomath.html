@@ -1,0 +1,82 @@
+
+
+<script type="text/javascript">
+  /*Calcular donde se cortan dos circunferencias */
+  /*f(x)=(x-xo)2+(y-yo)2+r2
+  xo, yo= coordenadas donde está el centro de la circunferencia 1.
+  r=radio
+  x'0, y'0 = coordenadas en las que se encuentra el centro de la circunferencia 2*/
+
+  function intersection(x0, y0, r0, x1, y1, r1) {
+        var x0 = document.getElementById("id_ejexcirc1").value;
+        var y0 = document.getElementById("id_ejeycirc1").value;
+        var r0 = document.getElementById("id_radio1").value;
+        var x1 = document.getElementById("id_ejexcirc2").value;
+        var y1 = document.getElementById("id_ejeycirc2").value;
+        var r1 = document.getElementById("id_radio2").value;
+        var a, dx, dy, d, h, rx, ry;
+        var x2, y2;
+
+        /* dx y dy son la distancia vertical (y) y horizontal (x) entre los centros de
+         * las dos circunferencias.
+         */
+        dx = x1 - x0;
+        dy = y1 - y0;
+
+        /* Se determina la distancia en línea recta entre los dos centros. */
+        d = Math.sqrt((dy*dy) + (dx*dx));
+
+        /* Ver si existe intersección o no. */
+        if (d > (r0 + r1)) {
+            /* Si no hay solución, los círculos no intersectan. */
+            return false;
+        }
+        if (d < Math.abs(r0 - r1)) {
+            /* Si no hay solución, un círculo está contenido dentro del otro. */
+            return false;
+        }
+
+        /* 'point 2' is the point where the line through the circle
+         * intersection points crosses the line between the circle
+         * centers.
+         */
+
+        /* Determine the distance from point 0 to point 2. */
+        a = ((r0*r0) - (r1*r1) + (d*d)) / (2.0 * d) ;
+
+        /* Determine the coordinates of point 2. */
+        x2 = x0 + (dx * a/d);
+        y2 = y0 + (dy * a/d);
+
+        /* Determine the distance from point 2 to either of the
+         * intersection points.
+         */
+        h = Math.sqrt((r0*r0) - (a*a));
+
+        /* Now determine the offsets of the intersection points from
+         * point 2.
+         */
+        rx = -dy * (h/d);
+        ry = dx * (h/d);
+
+        /* Determina los puntos de intersección en valores absolutos. */
+        var xi = x2 + rx;
+        alert(xi);
+        var xi_prime = x2 - rx;
+        var yi = y2 + ry;
+        var yi_prime = y2 - ry;
+
+        return [xi, xi_prime, yi, yi_prime];
+    }
+
+</script>
+
+<form onsubmit="intersection()">
+  <input type="text" id="id_ejexcirc1">
+  <input type="text" id="id_ejeycirc1">
+  <input type="text" id="id_radio1">
+  <input type="text" id="id_ejexcirc2">
+  <input type="text" id="id_ejeycirc2">
+  <input type="text" id="id_radio2">
+  <input type="submit" name="submit" value="Enviar">
+</form>

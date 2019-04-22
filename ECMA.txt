@@ -1,0 +1,15 @@
+ECMA--> European Computer Manufacturer Association
+Organismo europeo que fija una serie de especificaciones para componentes y lenguajes informáticos a nivel europeo.
+Para Javascript es ECMAScript. Estamos en la 6. Es decir, de las modificaciones que los usuarios hagan sobre el
+lenguaje, solo ciertas serán aceptadas por la ECMA, las que más compatibles sean con los sistemas que existan.
+
+Añadidos:
+const--> se le puede dar valor a una constante
+var --> se pueden crear globales, locales (dentro de una función) y let (locales dentro de bucles y condicionales).
+funciones de flecha
+forma de recorrer arrays--> script 46. array03.html
+
+Esta nueva especificación, ECMAScript 6, no ha borrado nada, solo ha añadido cosas que pueden ser no compatibles
+con algunos navegadores.
+
+De la ECMA, solo utilizaremos en Node.js arrays y módulos (en principio no en el lado de cliente, sino en el de server) 

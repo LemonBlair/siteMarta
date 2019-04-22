@@ -1,0 +1,30 @@
+<div id="capa1">
+
+</div>
+<style>
+  #capa1{
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background-color: steelblue;
+  }
+  #capa2{
+    position: relative;
+    width: 200px;
+    height: 200px;
+    background-color: darkred;
+  }
+</style>
+<!-- lo ponemos abajo porque como no hemos definido
+  el evento, se tiene que activar al abrir la pág-->
+<!-- innerHTML indica que miVariable va a ir dentro del elemento marcado.
+style.color o style.left nos permite dar estilo directamente al elemento marcado -->
+<!-- La alerta se carga más rápido que el resto del script, por eso sale vacía -->
+<script type="text/javascript">
+  var miVariable="<div id='capa2'></div>"
+  document.getElementById("capa1").innerHTML=miVariable;
+  document.getElementById("capa2").style.left="100px";
+  document.getElementById("capa2").style.width="20px";
+  var a = document.getElementById("capa1").style.width;
+    alert(a);
+</script>

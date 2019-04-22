@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div id="uno">
+
+    </div>
+
+  </body>
+  <style>
+    #uno{
+      position: relative;
+      width: 100px;
+      height: 100px;
+      background-color: grey;
+    }
+  </style>
+  <script type="text/javascript">
+    var colorprompt;
+    colorprompt= prompt("Elije un color: azul, verde o rojo.","");
+    switch (colorprompt) {
+      case "azul": document.getElementById("uno").style.backgroundColor="blue";
+      break;
+      case "verde": document.getElementById("uno").style.backgroundColor="green";
+      break;
+      case "rojo": document.getElementById("uno").style.backgroundColor="red";
+      break;
+      default: document.write("No se ha elegido ninguno de los colores.","")
+    }
+  </script>
+</html>

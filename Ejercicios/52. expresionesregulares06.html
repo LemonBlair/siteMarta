@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      var frase= prompt('Introduzca su matrícula',"");
+      var patron = /[0-9]{4}[B-DF-HJ-NP-RSTV-Z]{3}/;
+      /* Solo tendrá en cuenta que empiece con un menos y un número, lo demás le dará igual*/
+      if (patron.test(frase)) {
+        alert("Matrícula correcta");
+      } else {
+        alert("Matrícula incorrecta");
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,43 @@
+<div class="flexible">
+  <div id="capa1">1</div>
+  <div id="capa2">2</div>
+  <div id="capa3">3</div>
+
+</div>
+
+<style media="screen">
+  .flexible{
+    display: flex;
+    /*align-items: center;*/
+    justify-content: space-around;
+    /*Eje principal: en fila de derecha a izquierda */
+    /*flex-direction: column; este tendra eje principal: de arriba abajo*/
+    /*flex-direction: row-reverse; como el estandar pero los elementos en el orden inverso y desde el extremo dcho*/
+    /*flex-direction: column-reverse;*/
+    /*como las columnas pero desde abajo y con orden inverso de los elementos */
+    width: 500px;
+    height: 500px;
+    background-color: teal;
+  }
+  #capa1{
+    background-color: salmon;
+    /*margin: 20px;*/
+    /*flex-grow: 1;*/
+    width: 100px;
+    height: 100px;
+  }
+  #capa2{
+    background-color: purple;
+    /*margin: 20px;*/
+    /*flex-grow: 2;*/
+    width: 100px;
+    height: 100px;
+  }
+  #capa3{
+    background-color: gold;
+    /*margin: 20px;*/
+    /*flex-grow: 1;*/
+    width: 100px;
+    height: 100px;
+  }
+</style>

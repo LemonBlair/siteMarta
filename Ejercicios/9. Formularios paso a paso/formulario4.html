@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!-- class="no_display" -> para ocultar el botón que viene por defecto,
+le damos una clase al checkbox en la que luego pondremos display: none; -->
+<!-- Le damos al input un id. A través de ese id, controlaremos estilos
+  con la etiqueta "label". Al pinchar en la etiqueta, podremos activar <ol>
+    desactivar el botón. Además, nos dará estilos. Es importante el orden
+    de elementos. -->
+<!-- input[type="checkbox"] modificará todos los inputs que tengan un checkbox
+  dentro. :checked hará que los cambios de estilo se apliquen al activar la casilla.
+  +label indica que estos estilos se aplicarán a los input[-] que vayan seguidos
+  inmediatamente después por un label -->
+  <!-- display: inline; impide cambiar el tamaño. Con display: block; en la etiqueta
+    label, nos deja cambiar el tamaño. Block se coloca en vertical, con inline, todo seguido
+  inline-block hace que se disponga en linea pero actue como un block, permitiendo cambio de
+  tamaño -->
+  <!-- poner un <span></span> dentro de <label></label> es técnicamente más correcto,
+  pero es inline, es decir-> div por defecto es block, span es por defecto inline-->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <input type="checkbox" class="no_display" name="A" value="A" id="A"> A </input>
+    <label for="A"></label>
+    <input type="checkbox" class="no_display" name="B" value="B" id="B"> B </input>
+    <label for="B"></label>
+    <input type="submit" name="submit" value="submit">
+  </body>
+
+  <style media="screen">
+    .no_display{
+      display: none;
+    }
+    label{
+      background-color: blue;
+      display: inline-block;
+      width: 106.25px;
+      height: 106.25px;
+    }
+    input[type=checkbox]:checked+label{
+      background-image: url("./Images/tileset.jpg");
+    }
+
+  </style>
+</html>

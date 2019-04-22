@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      var frase= prompt('Ingrese una palabra. Yo le diré si acaba en vocal',"");
+      var patron = /[aiueoáéíóúAEIOUÁEIOU]$/;
+      /* Solo tendrá en cuenta que empiece con un menos y un número, lo demás le dará igual*/
+      if (patron.test(frase)) {
+        alert("Acaba en vocal");
+      } else {
+        alert("No acaba en vocal");
+      }
+    </script>
+  </body>
+</html>

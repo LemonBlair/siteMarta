@@ -1,0 +1,102 @@
+cmd
+
+bajar en la ruta --> cd ..
+subir un nivel --> cd nombredeldirectorio
+informacion sobre el directorio, listado de archivos... --> dir
+  dir /w --> salen en columnas
+  dir/p --> pagina el contenido. Los que quepan en la ventana. "presione una tecla para continuar" y añade más, una página nueva
+para cambiar de unidad de disco--> E:
+llamar (arrancarlo) a node --> node
+salir de node --> .exit
+abrir un archivo js --> node archivo.js
+para apagar un servidor --> ctrl + c
+ipconfig --> permite ver la configuracion de ip del ordenador
+
+
+js
+
+console.log() --> imprime en cmd lo que haya entre paréntesis
+
+módulos
+  -del core: propios de node
+    -os --> proporciona info del servidor (y del sistema operativo)
+    -fs --> maneja archivos
+    -http --> crear servidor web http  (protocolo de transferencia de hipertexto o texto enriquecido (que tiene vínculos))
+      -MIME types --> códigos que hablan sobre qué es el texto. Si decimos que es html, va a intentar maquetarlo
+      si mandamos un js como html, no sabrá interpretarlo (https://www.sitepoint.com/mime-types-complete-list/)
+      Ej: se haría como {'content-type':'application/x-pointplus'} para los .css. Habría que hacerlo así para todos y cada
+      uno de los archivos. Ahora hay un framework llamado express que se encarga de manejar los archivos que el servidor envía,
+      enruta todos los archivos (entre otros).
+      -códigos de estado de las conexiones http --> al enviar algo, lo correcto es ponerle el código de estado adecuado.
+      No es algo que tú le das como tal, sino la clase de errores que puede experimentar. Si todo está correcto, recibe 200.
+    -url --> manejar direcciones. Pueden ser url completa (www.laquesea.com/archivo.html?parametro1=a&parametro2=b&),
+    que se compone de la ruta o path (hasta la interrogacion, el action del formulario) y los parametros (despues de la interrogacion, se haria split con '&')
+    Los parámetros (name=value;) se envían con el método get (method="get" en el formulario, por ej) y se extrae el value haciendo split con el caracter de
+    escape "=". En principio, esto ya no se usa porque existe express. direction.parse(peticion.url).path
+                                                                                                    .pathname
+                                                                                                    .query
+    direction.parse --> convierte el string (peticion.url) que viene de la propiedad direction (que es direction = require('url') en un objeto url.
+    Puede extraer con un split predefinido la ruta completa (path), la ruta hasta la ? (pathname) o los parámetros (query).
+    -net --> de estas no ha dicho nada
+    -path --> de estas no ha dicho nada
+  -propios: los creamos nosotros
+  -npm: node package manager --> administrador de modulos (librerías) de terceros
+    -Están disponibles en npmjs.com
+    -instalar npm en node no es necesario, viene instalado
+    -npm install nombredelpaquete --save --> instala un paquete SOLO en la carpeta del proyecto donde estemos, a menos que pongamos -g después del nombre del paquete (npm install -g express)
+      -Con @version podemos marcar la versión concreta que queremos. Si no, por defecto, instala la más reciente que sea compatible.
+      Para que guarde las dependencias dentro del json, se puede poner al final --save, aunque ya no es necesario, lo hace automáticamente
+      (siempre que estén ya instalados y hagas después el json).
+      Sin embargo, esto es útil para guardar dependencias que solo se emplearán en desarrollo:
+        -npm install nombredelpaquete -dev
+      -Estas dependencias irán al package.json. Al ejecutar en la carpeta del proyecto (fijar cmd a esa carpeta) el comando npm install
+      se instalan automáticamente todas las dependencias definidas en package.json. Útil para usuarios que se instalan la aplicación
+      por primera vez o que cambian de ordenador.
+    -npm rm (-g) express --> eliminar un paquete de forma local
+    -npm uninstall express --> equivalente
+    -npm ls --> lista todas las dependencias del proyecto
+    -npm outdated --> consulta las últimas actualizaciones compatibles de las dependencias que tenemos en el proyecto
+    -npm update -save --> actualiza todo lo desactualizado a versiones compatibles más modernas. Solo un guión en save porque no tengo
+    que crear las dependencias, ya están creadas
+    -NODEMON: pone una escucha. Cada vez que se realiza un cambio en el servidor (archivo server.js), lo reinicia.
+      -para abrir la app, llamaremos a nodemon en lugar de a node --> npx nodemon app.js
+    -npm install express-generator --> genera automaticamente un arbol de directorio, solo merece la pena para proyectos muy grandes
+    -npm mongoose --> mongoosejs.com/docs/queries.html
+
+nodejs.org/api --> documentacion de node y de sus módulos del core.
+Único lenguaje de programación de servidor que funciona de manera asíncrona (no espera a terminar una conexión para empezar otra)
+
+handlebearsjs.com --> pagina que genera plantillas de html y json
+json
+
+javascript object notation
+Sirve para el intercambio de datos entre archivos js. Ayuda a organizar jerárquicamente la información.
+Un documento en formato .json es un objeto y tiene sus métodos. Aunque sea un objeto, es de texto plano, con lo cual, pesa muy poco.
+Esto facilita el traspaso de info entre server y client, haciéndolo más rápido.
+Formato: {"nombre":"contenido"}
+IMPORTANTE: las comillas deben ser dobles
+para meter dentro de una entrada varios elementos, se marca que habrá varios con corchetes [] y dentro se ponen los elementos con llaves {}
+
+bases de datos
+
+tablas donde almacenamos datos (con formato y logica, con condiciones, relacionales) o archivos de texto plano (json, no relacional). Cada elemento es un registro.
+Ej json registro
+{"nombre":"fulanito",
+"contraseña":"76dhyf8",
+"edad":"15"
+}
+
+
+Modelo Vista-Controlador
+Tres carpetas:
+  -Modelo: Servidor (back-end), lo que se ejecuta en server. Lleva la lógica de la aplicación, toma datos del Controlador
+  y se los pasa al cliente.
+  -Vista: Cliente (front-end), lo que se va a ver en la pantalla. Lo que vee o lee el usuario.
+  -Controlador: Archivos de los que dependen server y cliente para funcionar, está en el servidor (back-end) también.
+  Mejor archivos pequeños y específicos que se puedan usar mucho en el modelo, muy recurrentes y reutilizables.
+  El controlador debería ser empleable en varias aplicaciones (modelos), pero el modelo debería ser exclusivo de aplicación,
+  como el cliente. Es donde van los eventos o inputs que introduce el usuario, que pasan al modelo y de ahi al cliente.
+
+  La vista le pide algo al modelo. El modelo puede devolverle información directamente o necesitar algo desde el controlador, que se lo devuelve para que se lo pase al cliente.
+  Tambien puede ser que la vista pida algo al modelo que el controlador le puede dar directamente.
+  El servicio FullRest funciona así. Controlador sería la base de datos a la que tenemos acceso incompleto.

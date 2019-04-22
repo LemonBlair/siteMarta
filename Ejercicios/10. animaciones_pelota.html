@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang=es dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div id="bola">
+    </div>
+  </body>
+  <style>
+    #bola{
+      position: absolute;
+      /* para poder darle tamaño o moverla de sitio tenemos que asignar
+      position. Para animaciones vale relative y absolute */
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      top: 100px;
+      left: 100px;
+      background-color: rgb(70, 1, 63);
+
+      animation-name: bola;
+      animation-duration: 1s;
+      animation-timing-function: cubic-bezier(.76, .02, 1, 1);
+      animation-direction: alternate;
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes bola {
+      from{
+        top: 100px;
+      }
+      90%{
+        /* pto de partida, definir aunque esté en bola */
+        width: 100px;
+        height: 100px;
+        left: 100px;
+      }
+      to{
+        top: 300px;
+        width: 120px;
+        height: 80px;
+        left: 90px;
+      }
+    }
+  </style>
+</html>

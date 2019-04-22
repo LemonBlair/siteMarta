@@ -1,0 +1,24 @@
+<script type="text/javascript">
+
+  function PonerTildes(texto){
+    var texto=document.getElementById("campo").value;
+    // Opcion 1: var texto=texto.replace(new RegExp(/[áéíóú]/gi),"gatitos");
+    // Opcion 2: //
+    var texto=texto.replace(/á/g, "gatitos");
+    var texto=texto.replace(/Á/g, "patitos");
+    var texto=
+    document.getElementById("campo").value=texto;
+    /*var longcadena=texto.lenght;
+    for (i=0; i==longcadena-1; i++){
+      if (texto.charAt(i)=="á"){
+        texto.charAt(i).replace("á", "gatitos");
+      }
+    }
+    alert(texto);*/
+  }
+</script>
+
+<form action="" method="get" onsubmit="PonerTildes()">
+  <input type="text" id="campo" name="tildes" value="">
+  <input type="submit" name="enviar" value="Enviar">
+</form>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<!-- REGISTRO -->
+<!-- campo de password
+al hacer on submit, hay que comprobar que la contraseña tenga:
+empiece por letra mayúscula
+que contenga un símbolo raro ([,],?,{,})
+que tenga letras y números
+que tenga mayúsculas y minúsculas
+al menos de 8 caracteres de longitud -->
+
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+    <form onsubmit="contraseña()">
+      <input id="campo" type="text" name="contraseña">
+    </form>
+    <script type="text/javascript">
+
+      function contraseña(){
+        var contraseña = document.getElementById('campo').value;
+        alert(contraseña);
+        var patron = /^[A-Z]{1}[\w\[\]\{\}\?]*[\[\]\{\}\?]{1}[\w\[\]\{\}\?]*[a-z]{1}[\w\[\]\{\}\?]*[0-9]{1}[\w\[\]\{\}\?]{4,}/
+        if (patron.test(frase)) {
+          alert("Contraseña correcta");
+        } else {
+          alert("Contraseña incorrecta. Debe empezar por minúscula, contener al menos un caracter raro, una minúscula o número y tener un mínimo de 8 caracteres");
+        }
+
+      }
+
+    </script>
+  </body>
+</html>

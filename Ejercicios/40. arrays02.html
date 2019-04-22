@@ -1,0 +1,28 @@
+<script type="text/javascript">
+
+
+    mesArray = new Array();
+    mesArray[0] = "Enero";
+    mesArray[1] = "Febrero";
+    mesArray[2] = "Marzo";
+    mesArray[3] = "Abril";
+    mesArray[4] = "Mayo";
+    mesArray[5] = "Junio";
+    mesArray[6] = "Julio";
+    mesArray[7] = "Agosto";
+    mesArray[8] = "Septiembre";
+    mesArray[9] = "Octubre";
+    mesArray[10] = "Noviembre";
+    mesArray[11] = "Diciembre";
+
+    numArray = new Array("1","2","3","4","5","6","7","8","9","10","11","12");
+
+    var numUsuario = prompt("Introduzca un número del 1 al 12: ","");
+/*      alert(mesArray[numUsuario-1]);
+*/
+    var indice= numArray.indexOf(numUsuario);
+      alert(indice);
+      alert(mesArray[indice]);
+
+
+</script>

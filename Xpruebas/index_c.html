@@ -1,0 +1,43 @@
+<html>
+	<head>
+	</head>
+	<body>
+		<div id= "capapadre">
+
+			<div id= "capahija">
+			</div>
+
+		</div>
+
+	</body>
+
+	<style>
+		#capapadre{
+			position: relative;
+			width: 500px;
+			height: 500px;
+			background-color: red;
+			margin-left: auto;
+			margin-right: auto;
+			}
+		
+		#capahija{
+			position: relative;
+			width: 100px;
+			height: 100px;
+			background-color: darkblue;
+			margin-left: auto;
+			margin-right: auto;
+			}
+	</style>
+
+<!-- Nota 1: Al estar una capa dentro de la otra, ambas comparten la referencia del eje de coordenadas -->
+<!-- Nota 2: margin-left: auto; y margin-right: auto; hace que el elemento se centra con respecto a la capa en la que se encuentra -->
+<!-- Nota 3: position: absolute; anula el efecto de margin-left/right: auto; -->
+<!-- Nota 4: position: relative; en capahija rescata el efecto margin auto -->
+<!-- Nota 5: con ambas posiciones relativas, también funciona -->
+<!-- Nota 6: con position: absolute; en capahija, se anula el efecto margin auto -->
+<!-- Nota 7: en resumen; position: absolute; anula el efecto de márgen automático. La capa hija debe ser relativa, mientras que la padre puede ser static o absolute -->
+
+
+</html>

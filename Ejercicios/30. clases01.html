@@ -1,0 +1,35 @@
+<!--Los Objetos (por convencion en mayuscula) tienen propiedades y metodos. Las propiedades son invariables dentro del objeto. si hace esferas
+siempre hara esferas. Las propiedades si son modificables: puede hacer esferas rojas y grandes. para acceder/modificar:
+objeto.propiedad
+objeto. metodo()
+
+clase date-> crea objeto de tipo fecha, que extrae del ordenador que ejecuta el script (fecha y hora).
+Date(año, mes, dia, hora, minuto, segundo)
+se crea asi: var fecha;
+fecha=newDate();
+Si es antes del 2000, solo devuelve las dos ultimas cifras. Si es despues, las 4.
+Los metodos de la clase Date son todos de tipo get(obtener) o set(asignar).
+fecha.setFullYear(); o fecha.getFullYear();-->
+
+<script type="text/javascript">
+  var fecha = new Date();
+//  fecha.setFullYear(1994);
+//  alert(fecha.getFullYear());
+  var dia = fecha.getDate();
+  var month = new Array();
+    month[0] = "enero";
+    month[1] = "febrero";
+    month[2] = "marzo";
+    month[3] = "abril";
+    month[4] = "mayo";
+    month[5] = "junio";
+    month[6] = "julio";
+    month[7] = "agosto";
+    month[8] = "septiembre";
+    month[9] = "octubre";
+    month[10] = "noviembre";
+    month[11] = "diciembre";
+  var mes = month[fecha.getMonth()];
+  var año = fecha.getFullYear();
+  alert("Hoy es " +dia+ " de " +mes+ " del " +año+ ".");
+</script>

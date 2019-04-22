@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <form class="" action="https://www.google.com" method="get" onsubmit="return funcion();">
+      <select id="selector" name="Animales" onchange="Index()">
+        <option value="perros">Perros</option>
+        <option value="gatos">Gatos</option>
+        <option value="patos">Patos</option>
+      </select>
+      <input type="submit" name="" value="Submit">
+    </form>
+  </body>
+<script type="text/javascript">
+  function funcion(){
+    return true;
+    //Si return es false no envía el formulario//
+  }
+  function Index(){
+    var seleccionado;
+    seleccionado=document.getElementById('selector').selectedIndex;
+    valor=document.getElementById('selector').options[seleccionado].value;
+    texto=document.getElementById('selector').options[seleccionado].text;
+    alert("Opción seleccionada: " +seleccionado);
+    alert("Value: " +valor);
+    alert("Texto de la opción: " +texto);
+  }
+</script>
+<!--Podemos acceder/realizar acciones según:
+la opción seleccionada(index, es un número, es la posición, y empieza en 0),
+el value
+o
+el texto que hemos puesto entre las etiquetas option.
+Con .value accedemos a valores de otras etiquetas, como el tipo texto-->
+</html>

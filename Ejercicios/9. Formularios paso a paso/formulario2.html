@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+
+</head>
+<body>
+  <form action="http://www.google.com/search" method="get">
+    <select class="select" name="selector">
+      <option value="Gatos"> Gatos </option>
+      <option value="Masgatos"> Más gatos </option>
+    </select>
+    <!-- el valor de la opcion pasa a la variable "selector" del select -->
+    <input type="text" name="q">
+    <input type="submit" value= "Enviar">
+    <select class="select" name="selector2">
+      <option value="Patos"> Patos </option>
+      <option value="Maspatos"> Más patos </option>
+      <input type="text" name="q">
+      <input type="submit" value= "Enviar">
+    </select>
+    <textarea name="textarea" rows="8" cols="40"></textarea>
+    <input type="color" name="color" value="#ff0000">
+    <input type="date" name="date" value="2001-09-11">
+    <input type="button" value= "Saludo" onclick="alert('¡Hello!')">
+  </form>
+</body>
+<style>
+  input[type=text]{
+    position: relative;
+    width: 300px;
+    height: 26px;
+    border-color: red;
+    border-width:5px;
+    border-style: double;
+    border-radius: 25px;
+    padding: 0px 20px 0px 20px;
+  }
+  input[type=submit]{
+    position: relative;
+    width: 50px;
+    height: 26px;
+    background-color: red;
+    padding: 0px 0px 0px 0px;
+    border-color: red;
+    box-shadow: none;
+    font-family: cambria;
+    border-radius: 25px;
+  }
+  select{
+    font-family: cambria;
+    border-radius: 25px;
+    height: 26px;
+    font-size: 14px;
+  }
+  input[type=text]:hover{
+    background-color: rgb(255, 231, 231);
+  }
+  textarea{
+    position: relative;
+    margin-top: 20px;
+    resize: none;
+  }
+</style>
+</html>

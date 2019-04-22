@@ -1,0 +1,85 @@
+<script type="text/javascript">
+  function ComprobarEmail(email)
+  {
+    var email= document.getElementById("campo").value;
+    var longemail = email.length;
+    alert(longemail);
+    var arroba = email.indexOf("@");
+    if (arroba==-1)
+    {
+      alert("No tiene arroba. ¿Qué clase de e-mail tienes en mente, tío?");
+      return false;
+    }
+    if (arroba!=-1)
+    {
+      alert("Tiene arroba. Buen comienzo.");
+      if (arroba==0)
+      {
+        alert("Tiene que haber algo antes de la arroba, genio.");
+        return false;
+      } else
+        {
+          alert("También algo más. ¡Perfecto! Ahora a comprobar el resto.");
+          if (email.charAt(arroba-1)!="."){
+            for (i=arroba+1; i<=longemail-1; i++)
+              {
+              alert("Estoy en el bucle");
+              var caracter = email.charAt(i);
+              alert(caracter);
+              if (caracter == "@")
+                {
+                alert("¿Dos arrobas? ¡Al carajo!");
+                return false;
+                } else
+                  {
+                    var punto= email.indexOf(".");
+                    if (punto!=-1)
+                    {
+                      alert("Tiene punto. No vamos mal.");
+                      if (punto==arroba+1)
+                      {
+                        alert("Algo no está yendo bien. ¡Tiene que haber algo entre la arroba y el punto!");
+                        return false;
+                      } else
+                        {
+                          alert("Me acerco al bucle.")
+                          for (j=punto+1; j<=longemail-1; j++)
+                          {
+                            alert("Estoy en el segundo bucle");
+                            var carpunto = email.charAt(j);
+                            alert(carpunto);
+                            if (carpunto == ".")
+                            {
+                              alert("No más de un punto detrás de la arroba, por favor.");
+                              return false;
+                            } else
+                              {
+                                var desdepunto=email.substring(punto+1);
+                                if (desdepunto.length<2)
+                                {
+                                  alert("¡No hay extensiones de dominio de menos de 2 caracteres, hombre!");
+                                  return false;
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+          } else
+            {
+              alert("No se permiten puntos antes de la arroba.")
+              return false;}
+        }
+      }
+        alert("Tenemos un email válido.");
+        return true;
+    }
+</script>
+
+<form action="https://www.google.com" method="get" onsubmit="return ComprobarEmail()">
+  <input type="text" id="campo" name="email" value="" required>
+  <input type="submit" name="enviar" value="Enviar" >
+</form>
+<!--al menos un caracter alfanumerico antes de la arroba,
+ al menos otro alfanumero antes del punto y dos caracteres minimo detras del punto-->

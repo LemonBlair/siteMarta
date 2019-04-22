@@ -1,0 +1,31 @@
+<!--var fecha="Dec 25, 1958";
+Date.parse(fecha);  milisegundos desde el 1 de enero de 1970 hasta fecha.-->
+<script type="text/javascript">
+
+  function pedirFecha(año, mes, dia, horas, minutos, segundos, milisegundos) {
+      var año= prompt("Año: ","");
+      alert(año);
+      var mes= prompt("Mes (en formato numérico): ","");
+      mes=mes-1;
+      alert(mes);
+      var dia= prompt("Día: ","");
+      alert(dia);
+      var horas= 0;
+      var minutos=0;
+      var segundos=0;
+      var milisegundos=0;
+      return año, mes, dia, horas, minutos, segundos, milisegundos;
+    }
+
+
+  var fechahoy= new Date();
+  msfechahoy= Date.parse(fechahoy);
+//  var cumple=new Date(2019, 5, 7, 21, 0, 0, 0);
+  var cumple=new Date(pedirFecha());
+  mscumple= Date.parse(cumple);
+  var msfaltan=mscumple-msfechahoy;
+  var tiempofalta=parseInt(msfaltan/86400000);
+  alert("¡Marta! Faltan " +tiempofalta+ " días para tu cumple. ¡Yay!");
+
+
+</script>

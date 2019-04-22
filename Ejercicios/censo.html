@@ -1,0 +1,45 @@
+<script type="text/javascript">
+  var nombre="";
+  var genero="";
+  var male=0;
+  var female=0;
+  var other=0;
+  var number="";
+  //var edad="";
+  var menos30=0;
+  var mas30menos55=0;
+  var mas55=0;
+
+  do{
+    nombre=prompt("Nombre:","");
+
+  if (nombre!=0){
+
+    genero=prompt("Genero (M, F u O):","");
+      if (genero=="M") {
+        male=male+1;
+      } else if (genero=="F"){
+          female=female+1;
+        } else if(genero=="O"){
+          other=other+1;
+        }
+    edad=prompt("Edad:","");
+      if (edad<30){
+        menos30=menos30+1;
+        alert(menos30);
+      } else if (edad>=30 && edad<55){
+        mas30menos55=mas30menos55+1;
+        alert(mas30menos55);
+      } else if (edad>=55) {
+        mas55=mas55+1;
+      }
+  }
+}
+    while (nombre!="0");
+    alert("Male count is "+male);
+    alert("Female count is "+female);
+    alert("Other count is "+other);
+    alert("Range less than 30 years = " +menos30);
+    alert("Range between 30 and 55 years = " +mas30menos55);
+    alert("Range more than 55 years = " +mas55);
+</script>
