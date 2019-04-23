@@ -6,7 +6,7 @@
   </head>
   <body>
     <div id="capa"></div>
-    <div id="boton"><button class="boton" type="button" onClick="cargar();">Cargar</button><button class="boton" type="button" onClick="cargarotracosa();">Cargar otra cosa</button></div>
+    <div id="boton"><button class="boton" type="button" onClick="cargar('ejemplo01.html');">Cargar</button><button class="boton" type="button" onClick="cargar('ejemplo02.html');">Cargar otra cosa</button></div>
 
 
 
@@ -36,7 +36,8 @@
     }
   </style>
   <script type="text/javascript">
-    function cargar(){
+  //Boton es la página que se pasa a la url cuando pulsamos el botón
+    function cargar(boton){
       /* xmlHttpRequest --> clase que permite utilizar AJAX. Convierte las páginas
        * que queremos traer a xml. Una vez llega a nuestra página, la parsea a texto
        * plano y la mete donde queramos */
@@ -54,26 +55,16 @@
            document.getElementById('capa').innerHTML = xmlHttp.responseText;    //Meter dentro del div con id capa el texto plano que devuelve el servidor como respuesta a nuestra petición
          }
        }
+
        /* Abre la conexión. Parámetros: Método de petición (get, post), dirección
         * a la que hacemos la petición (dentro del mismo servidor), true = asíncrona / false = síncrona
         */
-       xmlHttp.open("GET","http://localhost:8080/ejemplo01.html",true);
+       xmlHttp.open("GET","http://localhost:8080/"+boton,true);
        xmlHttp.send();
        /* En post y put habría que poner en send() los parámetros en json */
        /* En get y delete, se pasan los parámetros en la URL */
-    }
-    function cargarotracosa(){
-      var xmlHttp = new XMLHttpRequest();
 
-       xmlHttp.onreadystatechange = function (){
-         if (xmlHttp.readyState===4 && xmlHttp.status===200){                   //Si el envío está completado y no hay errores (status = 200)
-           document.getElementById('capa').innerHTML = xmlHttp.responseText;    //Meter dentro del div con id capa el texto plano que devuelve el servidor como respuesta a nuestra petición
-         }
-       }
+     }
 
-       xmlHttp.open("GET","http://localhost:8080/ejemplo02.html",true);
-       xmlHttp.send();
-
-    }
   </script>
 </html>

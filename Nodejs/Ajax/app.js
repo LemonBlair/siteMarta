@@ -7,18 +7,6 @@ app.use(express.static('public'));                                              
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 /* Arranque de servidor */
 var server = app.listen(8080, function(){
   console.log('Servidor corriendo en el puerto 8080');

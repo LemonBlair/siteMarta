@@ -5,14 +5,23 @@
     <title></title>
   </head>
   <body>
+    <div id="peticion">Escriba el nombre del usuario que desea encontrar:<input id="texto" type="text" name="" value=""></input></div>
+
+    <div id="peticion"><p>Nuevo usuario:</p>Nombre:<input id="newnombre" type="text" name="" value=""></input></div>
+    <div id="peticion">Password:<input id="newpass" type="text" name="" value=""></input></div>
     <div id="capa"></div>
-    <div id="boton"><button class="boton" type="button" onClick="cargar();">Cargar</button><button class="boton" type="button" onClick="cargarotracosa();">Cargar otra cosa</button></div>
+    <div id="boton"><button class="boton" type="button" onClick="buscarUsuario();">Buscar</button><button class="boton" type="button" onClick="añadirUsuario();">Añadir usuario</button></div>
 
 
 
 
   </body>
   <style media="screen">
+    #peticion{
+      position: relative;
+      margin: auto;
+      width: 400px;
+    }
     #capa{
       position: relative;
       margin: auto;
@@ -36,7 +45,7 @@
     }
   </style>
   <script type="text/javascript">
-    function cargar(){
+    function buscarUsuario(){
 
       var xmlHttp = new XMLHttpRequest();
 
@@ -46,11 +55,14 @@
          }
        }
 
-       xmlHttp.open("GET","http://localhost:8080/usuario?nombre=Gato",true);    //Mando en la url la petición a la base de datos que quiero mostrar en el div
+       var nombre = document.getElementById('texto').value;
+       var criterio = "?nombre="+nombre;
+
+       xmlHttp.open("GET","http://localhost:8080/usuario"+criterio,true);    //Mando en la url la petición a la base de datos que quiero mostrar en el div
        xmlHttp.send();
 
     }
-    function cargarotracosa(){
+    function añadirUsuario(){
       var xmlHttp = new XMLHttpRequest();
 
        xmlHttp.onreadystatechange = function (){
@@ -59,8 +71,18 @@
          }
        }
 
-       xmlHttp.open("GET","http://localhost:8080/usuario?nombre=Cerdo",true);
-       xmlHttp.send();
+       var nombre = document.getElementById('newnombre').value;
+       alert(nombre);
+       var password = document.getElementById('newpass').value;
+       alert(password);
+       var nuevonombre = "nombre=" + nombre;
+       alert(nuevonombre);
+       var nuevopassword = "password=" + password;
+       alert(nuevopassword);
+
+       xmlHttp.open("POST","http://localhost:8080/usuario",true);
+       xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+       xmlHttp.send(nuevonombre +"&"+nuevopassword);
 
     }
   </script>

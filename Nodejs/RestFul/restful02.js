@@ -53,6 +53,22 @@ app.get('/usuario', function(req,res){
 
 });
 
+/* Para el método post */
+app.post('/usuario', function(req, res){
+  var nombre = req.body.nombre;
+  var password = req.body.password;
+  // En postman con url encoded en el body
+  var nuevoUsuario = new usuario(
+    {Nombre:nombre,
+    Password:password
+  });
+  
+  nuevoUsuario.save(function(err, nuevoUsuario){
+    if (err) return console.log('Error al introducir el dato en la base de datos');
+  });
+
+});
+
 
 /* Conexión al servidor */
 var server = app.listen(8080, function (){
