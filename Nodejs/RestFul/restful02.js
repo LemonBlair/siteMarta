@@ -9,6 +9,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
 }));
+app.use(express.static('public'));          // Para poder mandar a prueba.html el resultado de la búsqueda
 
 /*Lo que sería la aplicación */
 
@@ -51,6 +52,7 @@ app.get('/usuario', function(req,res){
   });
 
 });
+
 
 /* Conexión al servidor */
 var server = app.listen(8080, function (){

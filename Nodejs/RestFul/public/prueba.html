@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div id="capa"></div>
+    <div id="boton"><button class="boton" type="button" onClick="cargar();">Cargar</button><button class="boton" type="button" onClick="cargarotracosa();">Cargar otra cosa</button></div>
+
+
+
+
+  </body>
+  <style media="screen">
+    #capa{
+      position: relative;
+      margin: auto;
+      width: 400px;
+      min-height: 400px;
+      background-color: cyan;
+    }
+    #boton{
+      position: relative;
+      width: 400px;
+      text-align: center;
+      margin-left: auto;
+      /*min-height: 20px;*/
+      margin-right: auto;
+    }
+    .boton{
+      position: relative;
+      padding: 7px 15px;
+      margin: 15px 30px;
+
+    }
+  </style>
+  <script type="text/javascript">
+    function cargar(){
+
+      var xmlHttp = new XMLHttpRequest();
+
+       xmlHttp.onreadystatechange = function (){
+         if (xmlHttp.readyState===4 && xmlHttp.status===200){                   //Si el envío está completado y no hay errores (status = 200)
+           document.getElementById('capa').innerHTML = xmlHttp.responseText;    //Meter dentro del div con id capa el texto plano que devuelve el servidor como respuesta a nuestra petición
+         }
+       }
+
+       xmlHttp.open("GET","http://localhost:8080/usuario?nombre=Gato",true);    //Mando en la url la petición a la base de datos que quiero mostrar en el div
+       xmlHttp.send();
+
+    }
+    function cargarotracosa(){
+      var xmlHttp = new XMLHttpRequest();
+
+       xmlHttp.onreadystatechange = function (){
+         if (xmlHttp.readyState===4 && xmlHttp.status===200){                   //Si el envío está completado y no hay errores (status = 200)
+           document.getElementById('capa').innerHTML = xmlHttp.responseText;    //Meter dentro del div con id capa el texto plano que devuelve el servidor como respuesta a nuestra petición
+         }
+       }
+
+       xmlHttp.open("GET","http://localhost:8080/usuario?nombre=Cerdo",true);
+       xmlHttp.send();
+
+    }
+  </script>
+</html>

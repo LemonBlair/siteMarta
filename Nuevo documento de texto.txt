@@ -1,12 +1,9 @@
-Examen módulo 2:
 
--Solo HTML y CSS.
--Mayoritariamente estática, sin js.
--Cuatro secciones en el menú.
--Estructura visual:
-     -Header: Logo (enlace que apunte al index), nav (en modo lista) con cuatro secciones, una de ellas un formulario y h1 que se vea (apuntes de arturo, accesibilidad).
-     -Body: sections (y dentro articles)
-     -Footer
--Responsive: ordenador y móvil
-     -El del móvil: nav de hamburguesa, esconder los elementos que no queramos que se vean con display none.
-                    quitar asides, positions relative. 
+AJAX
+
+Asincronous JavaScript and XML
+
+Permite hacer peticiones al servidor de forma asÃ­ncrona, independientemente de html.
+No es crossdomain, el navegador no permite usar ajax en dominios diferentes a donde se ejecuta la pÃ¡gina.
+Mismo servidor y mismo puerto, por seguridad.
+Puedes actualizar un elemento del html sin recargar la pÃ¡gina entera.
