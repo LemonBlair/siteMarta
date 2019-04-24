@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: "Lato", sans-serif;
+      background-color: var(--bg-color,white);
+      color: var(--font-color,black);
+    }
+    h1,h2,h3,h4,h5,h6 {
+      margin: 0px 0px 15px 0px;
+      color: var(--theme-color,orange);
+    }
+    p {
+      margin: 0px 0px 10px 0px;
+    }
+    #master-container {
+      position: relative;
+      width: 800px;
+      min-height: 600px;
+      margin: 0 auto;
+      background-color: rgb(250, 250, 250);
+      display: grid;
+      grid-template-columns: 200px 200px 1fr;
+      grid-template-rows: 100px 100px 100px 1fr;
+      grid-template-areas: "selector listado descripcion"
+                           "selector listado descripcion"
+                           "selector listado descripcion"
+                           "selector listado descripcion";
+      }
+    #selector{
+        background-color: red;
+        grid-area: selector;
+    }
+    #listado{
+        background-color: lightblue;
+        grid-area: listado;
+    }
+    #descripcion{
+        background-color: lightgrey;
+        grid-area: descripcion;
+    }
+  </style>
+
+  <head>
+    <meta charset="utf-8">
+    <title>POKÉDEX</title>
+  </head>
+
+  <body onload = "listarTipos();">
+    <div id="master-container">
+      <div id="selector">
+        <select id="tipos" onchange="seleccionarTipo(this);">
+
+        </select>
+      </div>
+      <div id="listado">
+        <ul id="lista">
+        </ul>
+      </div>
+      <div id="descripcion">
+      </div>
+    </div>
+  </body>
+<script type="text/javascript">
+  function listarTipos(){
+    var req = new XMLHttpRequest();
+    req.onreadystatechange = function(){
+      if (req.readyState == 4 && req.status == 200){
+        var response = req.responseText; //esta respuesta viene en texto plano
+
+        var listado = JSON.parse(response); //como nos interesa que vuela a ser json para que funcione como un array, lo parseamos
+
+        var contenido = "<option value='Tipo'>Tipos</option>";
+        var cantidad = listado.length;
+
+        for(a=0; a<cantidad; a++){
+          //Opcion A:
+          contenido = contenido + "<option value='" +listado[a].Tipo +"'>" + listado[a].Tipo + "</option>";
+          //Opcion B
+          //contenido += contenido.replace('Tipos', listado[a].Tipo);
+          //listado[a].tipo --> La respuesta de servidor es un array que contiene json. listado[a] = Tipo: planta. Puedo llamar a "planta" usando el nombre "Tipo".
+        }
+        document.getElementById('tipos').innerHTML = contenido;
+      }
+    }
+    req.open("GET","http://localhost:8080/tipos", true);
+    req.send();
+  }
+
+  function seleccionarTipo(valor){
+    var tipo = valor.value;
+
+    var req = new XMLHttpRequest();
+    req.onreadystatechange = function(){
+      if (req.readyState == 4 && req.status == 200){
+        var response = req.responseText;
+        var listado = JSON.parse(response);
+
+        var contenido = "";
+        var cantidad = listado.length;
+
+        for(a=0; a<cantidad; a++){
+          contenido = contenido + "<li onclick='mostrar("+a+");'>" + listado[a].Nombre + "</li>";
+        }
+        document.getElementById('lista').innerHTML = contenido;
+      }
+    }
+    req.open('GET', "http://localhost:8080/seleccion?tipo="+tipo, true);
+    req.send();
+  }
+</script>
+</html>
