@@ -3,6 +3,7 @@
 
   <style>
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
@@ -62,9 +63,30 @@
       position: absolute;
       right: 400px;
     }
+    .botoneditar{
+      position: absolute;
+      bottom:20px;
+      right: 200px;
+    }
+    #edit_botones{
+      position: absolute;
+      right: 400px;
+      bottom: 50px;
+    }
+    #eliminar{
+      right: 150px;
+    }
+    #confirmar{
+
+    }
+    #mensajeConfirmar{
+
+    }
     .form{
       position: absolute;
       top: 0px;
+      padding-left: 40px;
+      padding-top: 50px;
       width: 100%;
       height: 100%;
       background-color: black;
@@ -112,6 +134,21 @@
         <button type="button" id="botones" class="enviar" onclick="insertarenBase();">Enviar</button>
         <p id="respuesta"></p>
       </div>
+      <div id="formularioEditar" class="form">
+        <p class="cruz" onclick="cerrar();">X</p>
+        <!-- en cols equivale a 100em -->
+        <p>Nombre: </p> <input type="text" id="edit_nombre">
+        <p>Tipo: </p> <input type="text" id="edit_tipo">
+        <p>Imagen: </p> <input type="text" id="edit_imagen" placeholder="Introduzca una imagen del Pokèmon">
+        <p>Descripción: </p> <textarea id="edit_descripcion" rows="15" cols="100" placeholder="Escriba una descripción del Pokèmon"></textarea>
+        <button type="button" id="edit_botones" onclick="actualizar();">Enviar</button>
+        <p id="edit_respuesta"></p>
+      </div>
+      <div id='confirmar' class='form'>
+        <p class="cruz" onclick="cerrar();">X</p>
+        <p id="mensajeConfirmar">¿Estás seguro de que deseas eliminar este Pokèmon? <br>Esta acción no puede deshacerse.</p>
+        <button type="button" onclick="eliminar();">Confirmar</button>
+      </div>
     </div>
   </body>
 <script type="text/javascript">
@@ -123,7 +160,7 @@
 
         var listado = JSON.parse(response); //como nos interesa que vuela a ser json para que funcione como un array, lo parseamos
 
-        var contenido = "<option value='Tipo'>Tipos</option>";
+        var contenido = "<option value='Tipo'>Tipos:</option>";
         var cantidad = listado.length;
 
         for(a=0; a<cantidad; a++){
@@ -171,6 +208,9 @@ var index;
     contenido += "<p class='info'><strong>Tipo: </strong>" + listado[index].Tipo + "</p>";
     contenido += "<p class='info'><strong>Nombre: </strong>" + listado[index].Nombre + "</p>";
     contenido += "<p class='info'><strong>Descripción: </strong>" + listado[index].Descripción + "</p>";
+    contenido += "<button class='botoneditar' onclick='editar();'>Editar</button>";
+    contenido += "<button class='botoneditar' id='eliminar' onclick='confirmar();'>Borrar</button>";
+
     document.getElementById('descripcion').innerHTML = contenido;
   }
 
@@ -198,8 +238,53 @@ var index;
     req.send(nuevoPokemon);
   }
 
+  function editar(){
+    document.getElementById('formularioEditar').style.display='block';
+
+    document.getElementById('edit_nombre').value = listado[index].Nombre;
+    document.getElementById('edit_tipo').value = listado[index].Tipo;
+    document.getElementById('edit_imagen').value = listado[index].Imagen;
+    document.getElementById('edit_descripcion').value = listado[index].Descripción;
+  }
+
+  function actualizar(){
+    var id = listado[index]._id;
+    var nombre = document.getElementById('edit_nombre').value;
+    var tipo = document.getElementById('edit_tipo').value;
+    var imagen = document.getElementById('edit_imagen').value;
+    var descripcion = document.getElementById('edit_descripcion').value;
+
+    var pokemonEditado = "id=" + id + "&nombre=" + nombre + "&tipo=" + tipo + "&imagen=" + imagen + "&descripcion=" + descripcion;
+
+    var req = new XMLHttpRequest();
+    req.onreadystatechange = function(){
+      if (req.readyState == 4 && req.status == 200){
+        document.getElementById('edit_respuesta').innerHTML = req.responseText;
+      }
+    }
+    req.open("PUT", "http://localhost:8080/seleccion", true);
+    req.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    req.send(pokemonEditado);
+  }
+
+  function confirmar(){
+    document.getElementById('confirmar').style.display = 'block';
+  }
+
+  function eliminar(){
+    var req = new XMLHttpRequest();
+    req.onreadystatechange = function(){
+      if (req.readyState == 4 && req.status == 200){
+        document.getElementById('mensajeConfirmar').innerHTML = req.responseText;
+      }
+    }
+    req.open('DELETE', 'http://localhost:8080/seleccion?id=' + listado[index]._id, true);
+    req.send();
+  }
   function cerrar(){
     document.getElementById('formularioInsertar').style.display='none';
+    document.getElementById('formularioEditar').style.display='none';
+    document.getElementById('confirmar').style.display='none';
   }
 </script>
 </html>
