@@ -49,6 +49,30 @@ app.get('/seleccion', function(req, res){
   })
 });
 
+/* Peticiones por POST */
+// Si viene por post, los atributos están en body, no en query(get)
+app.post('/seleccion', function(req, res){
+  tipo.findOne({Tipo:req.body.tipo}, function (err, datos){
+    if(datos==undefined)
+    var nuevoTipo = new tipo({Tipo:req.body.tipo});
+    nuevoTipo.save(function (err, hecho){});
+  });
+
+  console.log(req.body.nombre);
+  var nuevoPokemon = new pokemon({Nombre: req.body.nombre,
+                                  Tipo: req.body.tipo,
+                                  Imagen: req.body.imagen,
+                                  Descripción: req.body.descripcion
+                                });
+  nuevoPokemon.save(function(err, pokemon){
+    if(err) return res.send("Ha ocurrido un error al añadir tu nuevo Pokèmon.");
+    if (pokemon) return res.send("¡Se ha añadido un nuevo Pokèmon!");
+  });
+});
+
+
+
+
 
 var server = app.listen(8080, function()
 {

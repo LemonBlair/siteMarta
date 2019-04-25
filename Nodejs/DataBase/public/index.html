@@ -44,6 +44,45 @@
         background-color: lightgrey;
         grid-area: descripcion;
     }
+    li:hover{
+      cursor: pointer;
+    }
+    img{
+      margin: 50px 50px;
+    }
+    .info{
+      padding: 0px 30px 30px 30px;
+      text-align: justify;
+    }
+    #botones{
+      position: absolute;
+      bottom: 50px;
+    }
+    .enviar{
+      position: absolute;
+      right: 400px;
+    }
+    .form{
+      position: absolute;
+      top: 0px;
+      width: 100%;
+      height: 100%;
+      background-color: black;
+      color: white;
+      font-size: 1.1em;
+      display: none;
+    }
+    .cruz{
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      color: white;
+      font-family: Arial;
+      font-size: 1.5em;
+    }
+    .cruz:hover{
+      cursor: pointer;
+    }
   </style>
 
   <head>
@@ -54,15 +93,24 @@
   <body onload = "listarTipos();">
     <div id="master-container">
       <div id="selector">
-        <select id="tipos" onchange="seleccionarTipo(this);">
-
-        </select>
+        <select id="tipos" onchange="seleccionarTipo(this);"></select>
+        <button id="botones" type="button" name="button" onclick="insertarNuevo();">Añadir</button>
       </div>
       <div id="listado">
         <ul id="lista">
         </ul>
       </div>
       <div id="descripcion">
+      </div>
+      <div id="formularioInsertar" class="form">
+        <p class="cruz" onclick="cerrar();">X</p>
+        <!-- en cols equivale a 100em -->
+        <p>Nombre: </p> <input type="text" id="new_nombre" placeholder="Escriba el nombre del Pokèmon">
+        <p>Tipo: </p> <input type="text" id="new_tipo" placeholder="Escriba el tipo del Pokèmon">
+        <p>Imagen: </p> <input type="text" id="new_imagen" placeholder="Introduzca una imagen del Pokèmon">
+        <p>Descripción: </p> <textarea id="new_descripcion" rows="15" cols="100" placeholder="Escriba una descripción del Pokèmon"></textarea>
+        <button type="button" id="botones" class="enviar" onclick="insertarenBase();">Enviar</button>
+        <p id="respuesta"></p>
       </div>
     </div>
   </body>
@@ -92,6 +140,9 @@
     req.send();
   }
 
+var listado;
+var index;
+
   function seleccionarTipo(valor){
     var tipo = valor.value;
 
@@ -99,7 +150,7 @@
     req.onreadystatechange = function(){
       if (req.readyState == 4 && req.status == 200){
         var response = req.responseText;
-        var listado = JSON.parse(response);
+        listado = JSON.parse(response);
 
         var contenido = "";
         var cantidad = listado.length;
@@ -112,6 +163,43 @@
     }
     req.open('GET', "http://localhost:8080/seleccion?tipo="+tipo, true);
     req.send();
+  }
+
+  function mostrar(indice){
+    index = indice;
+    var contenido = "<img src='./images/" + listado[index].Imagen + "' width='300px'>";
+    contenido += "<p class='info'><strong>Tipo: </strong>" + listado[index].Tipo + "</p>";
+    contenido += "<p class='info'><strong>Nombre: </strong>" + listado[index].Nombre + "</p>";
+    contenido += "<p class='info'><strong>Descripción: </strong>" + listado[index].Descripción + "</p>";
+    document.getElementById('descripcion').innerHTML = contenido;
+  }
+
+  function insertarNuevo(){
+    document.getElementById('formularioInsertar').style.display='block';
+  }
+
+  function insertarenBase(){
+    var nombre = document.getElementById('new_nombre').value;
+    var tipo = document.getElementById('new_tipo').value;
+    var imagen = document.getElementById('new_imagen').value;
+    var descripcion = document.getElementById('new_descripcion').value;
+
+    var nuevoPokemon = "nombre=" + nombre + "&tipo=" + tipo + "&imagen=" + imagen + "&descripcion=" + descripcion;
+
+    var req = new XMLHttpRequest();
+    req.onreadystatechange = function(){
+      if(req.readyState == 4 && req.status == 200){
+        document.getElementById('respuesta').innerHTML = req.responseText;
+      }
+    }
+    req.open("POST", "http://localhost:8080/seleccion", true);
+    /* Como estamos enviando por post, tenemos que decirle que el formulario está codificado como URL */
+    req.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    req.send(nuevoPokemon);
+  }
+
+  function cerrar(){
+    document.getElementById('formularioInsertar').style.display='none';
   }
 </script>
 </html>
