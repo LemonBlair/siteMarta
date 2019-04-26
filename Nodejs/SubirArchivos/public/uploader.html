@@ -92,6 +92,11 @@
     //Como hemos desactivado el modo múltiple en la etiqueta input type=file, solo habrá un archivo, que tendrá
     //índice 0 en el array
     reader.readAsDataURL(files[0]);
+    /* El método readAsDataURL es usado para leer el contenido del file especificado en su parámetro.
+     * Cuando la operación de lectura termina, el readyState se convierte en DONE, y el método onLoadend es lanzado.
+     * En ese momento, la propiedad result contiene la información con una URL representando la información del
+     * archivo como una cadena de caracteres.
+     */
     document.getElementById('ipt-texto').value = files[0].name;
   }
 

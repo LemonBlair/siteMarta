@@ -130,6 +130,7 @@
         <p>Nombre: </p> <input type="text" id="new_nombre" placeholder="Escriba el nombre del Pokèmon">
         <p>Tipo: </p> <input type="text" id="new_tipo" placeholder="Escriba el tipo del Pokèmon">
         <p>Imagen: </p> <input type="text" id="new_imagen" placeholder="Introduzca una imagen del Pokèmon">
+        <input id="ipt-archivo" type="file" name="file" onchange="procesarArchivo(event);">
         <p>Descripción: </p> <textarea id="new_descripcion" rows="15" cols="100" placeholder="Escriba una descripción del Pokèmon"></textarea>
         <button type="button" id="botones" class="enviar" onclick="insertarenBase();">Enviar</button>
         <p id="respuesta"></p>
