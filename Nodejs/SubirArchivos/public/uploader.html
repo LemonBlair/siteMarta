@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>UPLOADER</title>
+  </head>
+  <body>
+    <!-- La codificación "application/x-www-form-urlencoded" no vale para archivos -->
+
+    <!--<form action="http://localhost:8080/upload" method="post" enctype="multipart/form-data">-->
+
+      <!-- Con el atributo "multiple", se permitiría al usuario introducir varios archivos -->
+      <!-- Cuando sucede un evento, se guarda un objeto que contiene la información de lo ocurrido
+      en la etiqueta donde haya ocurrido -->
+      <input id="ipt-archivo" type="file" name="file" onchange="procesarArchivo(event);">
+      <label id= "mylabel" for="ipt-archivo">Click o arrastrar para subir archivos:</label>
+      <input id="ipt-texto" type="text" name="texto">
+      <input id="ipt-enviar" type="button" value="Enviar" onclick="Enviar()">
+      <p id="opt-respuesta">Aquí va a ir la respuesta del servidor</p>
+      <!--<input type="submit" value="Enviar" onsubmit="Enviar()">-->
+    <!--</form>-->
+  </body>
+  <style media="screen">
+    #ipt-archivo{
+      display: block;
+      width: 400px;
+      height: 400px;
+      background-color: teal;
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+    #mylabel{
+      position: absolute;
+      top: 0px;
+      display: block;
+      width: 400px;
+      height: 30px;
+      background-color: teal;
+      font-family: monospace;
+      font-size: 1.1em;
+      color: white;
+    }
+  </style>
+  <script>
+  function Enviar()
+  {
+    /**
+    * Los input type="file" permiten almacenar varios archivos.
+    * Siempre van a contener un array aunque el atributo multiple no esté o sea falso.
+    */
+    var archivo = document.getElementById("ipt-archivo").files[0];
+    var nombre = document.getElementById("ipt-texto").value;
+
+    /**
+    * Instancia del objeto FormData, para crear un formulario.
+    * Necesario porque en el html no hay un formulario, así que lo tenemos que crear dinámicamente.
+    * No usamos el formulario de html porque la respuesta se cargaría en una nueva página, pero queremos AJAX.
+    */
+    var formData = new FormData();
+
+    /**
+    * El método append añade elementos al formulario.
+    * El primer parámetro indica cómo se llamará el name.
+    * El segundo parámetro es el contenido asociado al name.
+    */
+    formData.append("nombre", nombre);    // nombre=(lo que contenga la variable nombre)&
+    formData.append("file", archivo);     // file=(los archivos introducidos)
+
+
+
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function()
+    {
+      if (xmlHttp.readyState === 4 && xmlHttp.status === 200)
+      {
+        document.getElementById("opt-respuesta").innerHTML = xmlHttp.responseText;
+      }
+    }
+    xmlHttp.open("POST", "http://localhost:8080/upload", true);
+    xmlHttp.send(formData);
+  }
+
+  function procesarArchivo(ev){
+    var files = ev.target.files; //Recojo los archivos que haya en el sitio (target) del que viene el evento
+    // Leer el archivo --> clase FileReader
+    var reader = new FileReader();
+    //NOTA: se usan funciones anónimas para que actúen de forma asíncrona
+    // Cuando se termine de leer el archivo,
+    reader.onloadend = function(){
+      document.getElementById('ipt-archivo').style.backgroundImage = "url('" + reader.result + "')";
+    };
+    //Como hemos desactivado el modo múltiple en la etiqueta input type=file, solo habrá un archivo, que tendrá
+    //índice 0 en el array
+    reader.readAsDataURL(files[0]);
+    document.getElementById('ipt-texto').value = files[0].name;
+  }
+
+</script>
+
+</html>
