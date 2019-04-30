@@ -39,46 +39,77 @@ app.post("/login", function(req, res){
   /* == Encriptado == */
   var salt = bcrypt.genSaltSync();                                              //Veces que lo encriptamos. Por defecto, si vacío, se encripta 10 veces.
   var encryptedPassword = bcrypt.hashSync(password, salt);
-  var nuevoUsuario = new usuario({Nombre: req.body.nombre, Email: req.body.email, Password: encryptedPassword, Confirmado: 'no'});
-  nuevoUsuario.save(function(error, usuario){
-    if(error){return res.send('Error interno. El registro no ha podido realizarse.');}
-    if(usuario){
-/* Email desde el cual enviamos el correo: servicio, cuenta y password */
-      var transporte = nodemailer.createTransport({
-        service: "Hotmail",
-        auth: {
-          user: 'juan.frontend@hotmail.com',
-          pass: '1POTORRO1924'
+  var nuevoUsuario = new usuario({
+    Nombre: req.body.nombre,
+    Email: req.body.email,
+    Password: encryptedPassword,
+    Confirmado: 'no'
+  });
+
+  usuario.findOne({Email: req.body.email}, function(error, encontrado){
+    if(error){
+      nuevoUsuario.save(function(error, usuario){
+        if(error){return res.send('Error interno. El registro no ha podido realizarse.');}
+        if(usuario){
+    /* Email desde el cual enviamos el correo: servicio, cuenta y password */
+          var transporte = nodemailer.createTransport({
+            service: "Hotmail",
+            auth: {
+              user: 'juan.frontend@hotmail.com',
+              pass: '1POTORRO1924'
+            }
+          });
+
+          /* Contenido del mensaje que enviamos. Podría ser texto plano o html */
+          var mensaje  = "Correo de verificación";
+          /* El enlace será un update de la base de datos que no va por put, sino por get */
+          var enlace   = "<a href='http://localhost:8080/confirmar?email=" + req.body.email + "'>Activar aquí</a>";
+
+          var opciones = {
+            from: 'juan.frontend@hotmail.com',
+            to: req.body.email,
+            subject: 'Correo de confirmación',
+            text: mensaje,
+            html: enlace
+          }
+
+          transporte.sendMail(opciones, function(error, info){
+            if(error) { console.log(error); }
+            else{ console.log('Se ha enviado el email de confirmación.' + info.response); }
+          });
+
+          return res.send('Se ha creado un nuevo usuario.');
         }
       });
-
-      /* Contenido del mensaje que enviamos. Podría ser texto plano o html */
-      var mensaje  = "Correo de verificación";
-      /* El enlace será un update de la base de datos que no va por put, sino por get */
-      var enlace   = "<a href='http://localhost:8080/confirmar?email=" + req.body.email + "'>Activar aquí</a>";
-
-      var opciones = {
-        from: 'juan.frontend@hotmail.com',
-        to: req.body.email,
-        subject: 'Correo de confirmación',
-        text: mensaje,
-        html: enlace
-      }
-
-      transporte.sendMail(opciones, function(error, info){
-        if(error) { console.log(error); }
-        else{ console.log('Se ha enviado el email de confirmación.' + info.response); }
-      });
-
-      return res.send('Se ha creado un nuevo usuario.');
     }
+    if (encontrado){res.send('El usuario ya existe');}
   });
+
 });
 
+/* == Confirmado del email == */
 app.get('/confirmar', function(req,res){
   usuario.updateOne({Email: req.query.email}, {Confirmado: 'si'}, function(err, hecho){
     if(err) return res.send('Error al confirmar.');
     if(hecho) return res.send('Email confirmado.');
+  });
+});
+
+
+/* == Comprobación en el inicio de sesión == */
+app.get('/login', function (req, res){
+  usuario.findOne({Nombre: req.query.nombre}, function(err, user){
+    if (user) {
+      if(bcrypt.compareSync(req.query.password, user.Password)){                // devuelve un true si son iguales, un false si no lo son
+        if(user.confirmado === 'no') {res.send('Correo no confirmado');} else{res.send('Se ha conectado.');}
+      }
+      else{
+        res.send('Contraseña incorrecta');
+      }
+    }
+    else{
+      res.send('El usuario no existe.');
+    }
   });
 });
 
