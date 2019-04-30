@@ -1,0 +1,20 @@
+/*
+Pasos:
+1. Registro:
+  -Nombre
+  -Email
+  -Password
+  -Verificación del Password
+2. Login
+  -¿Existe el usuario?
+  -¿Está bien escrita la contraseña?
+  -Comprobar la verificación
+
+Paquetes necesarios
+
+express
+mongoose
+nodemailer
+bcrypt
+
+*/

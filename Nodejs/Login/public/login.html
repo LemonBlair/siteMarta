@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <p>Nombre: <input type="text" id="nombre" name="nombre"></p>
+    <p>Contraseña: <input type="text" id="password" name="password"></p>
+    <button type="button" name="button" onclick = 'login();'>Enviar</button>
+    <p id="respuesta"></p>
+  </body>
+
+  <script type="text/javascript">
+    function login(){
+      var nombre   = document.getElementById('nombre').value;
+      var password = document.getElementById('password').value;
+
+      var req      = new XMLHttpRequest();
+      req.onreadystatechange = function (){
+        if (req.readyState === 4 & req.status === 200){
+          document.getElementById('respuesta').innerHTML = req.responseText;
+        }
+      }
+      req.open("GET", "http://localhost:8080/login?nombre=" + nombre + "&" + "&password=" + password, true);
+      req.send();
+    }
+  </script>
+</html>

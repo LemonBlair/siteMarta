@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <p>Nombre: <input type="text" id="nombre" name="nombre"></p>
+    <p>Email: <input type="text" id="email" name="email"></p>
+    <p>Contraseña: <input type="text" id="password" name="password"></p>
+    <button type="button" name="button" onclick = 'registrar();'>Enviar</button>
+    <p id="respuesta"></p>
+  </body>
+  <script type="text/javascript">
+  function registrar(){
+    var nombre   = document.getElementById('nombre').value;
+    var email    = document.getElementById('email').value;
+    var password = document.getElementById('password').value;
+
+    var datos    = "nombre=" + nombre + "&" + "email=" + email + "&" + "password=" + password;
+    var req      = new XMLHttpRequest();
+    req.onreadystatechange = function (){
+      if (req.readyState === 4 & req.status === 200){
+        document.getElementById('respuesta').innerHTML = req.responseText;
+      }
+    }
+    req.open("POST", "http://localhost:8080/login", true);
+    req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    req.send(datos);
+  }
+  </script>
+</html>
