@@ -1,0 +1,526 @@
+
+<html lang="es" dir="ltr">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: "Gloria Hallelujah", sans-serif;
+      /*background-color: rgb(135, 246, 236);*/
+      background: rgb(135, 246, 236);
+      color: black;
+    }
+    h1,h2,h3,h4,h5,h6 {
+      margin: 0px 0px 15px 0px;
+      color: black;
+    }
+    h1{
+      position: absolute;
+      left: 35%;
+      top: 2%
+
+    }
+    p {
+      margin: 0px 0px 10px 0px;
+    }
+    #master-container {
+      position: relative;
+      top: 100px;
+      width: 1000px;
+      min-height: 600px;
+      border-radius: 25px;
+      margin: 0 auto;
+      display: grid;
+      box-shadow: 5px 10px 18px #242650;
+      grid-template-columns: 200px 200px 1fr;
+      grid-template-rows: 100px 100px 100px 1fr;
+      grid-template-areas: "selector listado habilidad"
+                           "selector listado habilidad"
+                           "selector listado habilidad"
+                           "selector listado habilidad";
+      }
+    #selector{
+        background: rgb(91, 238, 252);
+        grid-area: selector;
+        border-radius: 25px 0px 0px 25px;
+        padding: 20px;
+    }
+    #listado{
+        background: rgb(18, 115, 200);
+        background-image:
+          radial-gradient(white 20%, transparent 0),
+          radial-gradient(white 20%, transparent 0);
+        background-size: 30px 30px;
+        background-position: 0 0, 15px 15px;
+        grid-area: listado;
+        padding: 20px;
+    }
+    #listado p{
+      position: relative;
+      background-color: white;
+      border-radius: 25px;
+      margin-right: 5px;
+      padding-left: 10px;
+    }
+    #listado ul{
+      position: relative;
+      list-style: none;
+      padding-left: 10px;
+      background-color: white;
+      border-radius: 25px;
+      margin-right: 5px;
+      margin-left: 20px;
+      margin-bottom: 20px;
+    }
+    #habilidad{
+        background: rgb(18, 55, 138);
+        grid-area: habilidad;
+        border-radius: 0px 25px 25px 0px;
+        color: white;
+    }
+    li:hover{
+      cursor: pointer;
+    }
+    img{
+      margin: 50px 50px;
+      border-radius: 25px;
+    }
+    .info{
+      padding: 0px 30px 30px 30px;
+      text-align: justify;
+    }
+    #botones{
+      position: absolute;
+      width: 50px;
+      height: 30px;
+      border-radius: 10px;
+      bottom: 20px;
+    }
+    .enviar{
+      position: absolute;
+      right: 600px;
+    }
+    .botoneditar{
+      position: absolute;
+      bottom:20px;
+      right: 400px;
+    }
+    #edit_botones{
+      position: absolute;
+      right: 400px;
+      bottom: 50px;
+    }
+    #eliminar{
+      right: 150px;
+    }
+    #confirmar{
+
+    }
+    #mensajeConfirmar{
+
+    }
+    .form{
+      position: absolute;
+      top: 0px;
+      padding-left: 40px;
+      padding-top: 50px;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(217deg, rgba(255,0,0,1), rgba(255,0,0,0) 100%),
+                  linear-gradient(127deg, rgba(0,255,0,1), rgba(0,255,0,0) 100%),
+                  linear-gradient(336deg, rgba(0,0,255,1), rgba(0,0,255,1) 100%);;
+      color: black;
+      font-size: 1.1em;
+      display: none;
+    }
+    .cruz{
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      color: white;
+      font-family: Arial;
+      font-size: 1.5em;
+    }
+    .cruz:hover{
+      cursor: pointer;
+    }
+
+    #picker{
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+
+    #p{
+      padding-top: 20px;
+    }
+
+  </style>
+
+  <head>
+    <meta charset="utf-8">
+    <title>¡Gatitos!</title>
+    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
+  </head>
+
+  <body onload = "listar();">                                                   <!-- Al cargar el body, se obtiene una lista de nombres y de colores -->
+    <h1>Base de datos de Gatitos</h1>
+    <div id="master-container">
+
+<!-- Selectores por color y por nombre -->
+      <div id="selector">
+        <p> Colores </p>
+        <select id="colores" onchange="seleccionarColor(this);"></select>
+        <p id="p"> Nombres </p>
+        <select id="nombres" onchange="seleccionarNombre(this);"></select>
+        <button id="botones" type="button" name="button" onclick="insertarNuevo();">Añadir</button>
+      </div>
+
+<!-- Div donde aparece el listado de resultados tras elegir color o nombre -->
+
+      <div id="listado">
+        <p>Por color:</p>
+        <ul id="lista">
+        </ul>
+        <p>Por Nombre:</p>
+        <ul id="listanombre">
+        </ul>
+      </div>
+
+<!-- Div donde aparecerá la información de la entrada seleccionada -->
+
+      <div id="habilidad">
+      </div>
+
+<!-- Formulario para añadir nuevos gatitos -->
+
+      <div id="formularioInsertar" class="form">
+        <p class="cruz" onclick="cerrar();">X</p>
+        <p>Nombre: </p> <input type="text" id="new_nombre" placeholder="¡Escribe el nombre de tu nuevo gatito!">
+        <p>Color: </p> <input type="text" id="new_color" placeholder="¿De qué color es tu gatito?">
+        <p>Imagen: </p> <input type="text" id="new_imagen" placeholder="Nombre de la foto del gatito aquí">
+        <input id="ipt-archivo" type="file" name="file" onchange="procesarArchivo(event);">
+        <p id="opt-respuesta">¿Se ha recibido la imagen?</p>
+        <p>Habilidad: </p> <textarea id="new_habilidad" rows="13" cols="100" placeholder="¿Qué sabe hacer tu gatito?"></textarea>
+        <button type="button" id="botones" class="enviar" onclick="ActMasEnviar();">Enviar</button>
+        <p id="respuesta"></p>
+      </div>
+
+<!-- Formulario para editar gatitos preexistentes en la base de datos -->
+
+      <div id="formularioEditar" class="form">
+        <p class="cruz" onclick="cerrar();">X</p>
+        <!-- en cols equivale a 100em -->
+        <p>Nombre: </p> <input type="text" id="edit_nombre">
+        <p>Color: </p> <input type="text" id="edit_color">
+        <p>Imagen: </p> <input type="text" id="edit_imagen" placeholder="¿Foto del gatito?">
+        <p>Habilidad: </p> <textarea id="edit_habilidad" rows="15" cols="100" placeholder="¿Qué puede hacer tu gatito?"></textarea>
+        <button type="button" id="edit_botones" onclick="actualizar();">Enviar</button>
+        <p id="edit_respuesta"></p>
+      </div>
+
+<!-- Pantalla superpuesta que te pregunta si está seguro de eliminar una entrada -->
+
+      <div id='confirmar' class='form'>
+        <p class="cruz" onclick="cerrar();">X</p>
+        <p id="mensajeConfirmar">¿Estás seguro de que deseas eliminar este gatito? <br>¡Esta acción no puede deshacerse!</p>
+        <button type="button" onclick="eliminar();">Confirmar</button>
+      </div>
+    </div>
+  </body>
+
+  <script type="text/javascript">
+
+/* Esta función, que se activa al cargar el body, obtiene de la base de datos las dos listas que van en los selectores:
+ * Colores y Nombres
+ */
+
+    function listar(){
+      listarColores()
+      listarNombres()
+    }
+
+/* Esta función selecciona los colores de los gatitos existentes en la base de datos 'colores'
+ * y nos los muestra como un selector desplegable
+ */
+    function listarColores(){
+
+      var req = new XMLHttpRequest();
+/* Comprobación del estado de la petición. Si está enviada y correcta, se procede a mostrar la respuesta */
+      req.onreadystatechange = function(){
+        if (req.readyState == 4 && req.status == 200){
+          var response = req.responseText; //esta respuesta viene en texto plano
+
+          var listado = JSON.parse(response); //como nos interesa que vuela a ser json para que funcione como un array, lo parseamos
+
+          var contenido = "";
+          var cantidad = listado.length;
+
+          for(a=0; a<cantidad; a++){
+            contenido = contenido + "<option value='" + listado[a].Color +"'>" + listado[a].Color + "</option>";
+          }
+/*Volcado de los datos en el elemento colores */
+          document.getElementById('colores').innerHTML = contenido;
+        }
+      }
+/* Envío de la petición */
+      req.open("GET","http://localhost:8080/colores", true);
+      req.send();
+    }
+
+/* Esta función selecciona los nombres de los gatitos existentes en la base de datos 'nombres'
+ * y nos los muestra como un selector desplegable
+ */
+
+    function listarNombres(){
+
+      var req = new XMLHttpRequest();
+
+      req.onreadystatechange = function(){
+        if (req.readyState == 4 && req.status == 200){
+          var response = req.responseText;
+
+          var listado = JSON.parse(response);
+
+          var contenido = "";
+          var cantidad = listado.length;
+
+          for (a=0; a<cantidad; a++){
+            contenido = contenido + "<option value='" +listado[a].Nombre +"'>" + listado[a].Nombre + "</option>";
+          }
+
+          document.getElementById('nombres').innerHTML = contenido;
+        }
+      }
+
+      req.open("GET","http://localhost:8080/nombres", true);
+      req.send();
+    }
+
+    var listado;
+    var index;
+
+/* Esta función nos muestra una lista de los gatitos existentes en la base de datos 'gatitos'
+ * que tienen el color seleccionado por el usuario
+ */
+      function seleccionarColor(valor){
+        /*El color es el valor del selector elegido por el usuario */
+        var color = valor.value;
+        var req = new XMLHttpRequest();
+
+        req.onreadystatechange = function(){
+          if (req.readyState == 4 && req.status == 200){
+            var response = req.responseText;
+            listado = JSON.parse(response);
+
+            var contenido = "";
+            var cantidad = listado.length;
+
+            for(a=0; a<cantidad; a++){
+              contenido = contenido + "<li onclick='mostrar("+a+");'>" + listado[a].Nombre + "</li>";
+            }
+
+            document.getElementById('lista').innerHTML = contenido;
+          }
+        }
+
+        req.open('GET', "http://localhost:8080/seleccion?color="+color, true);
+        req.send();
+      }
+
+/* Esta función nos muestra una lista de los gatitos existentes en la base de datos 'gatitos'
+ * que tienen el nombre seleccionado por el usuario (en principio, solo uno)
+ */
+      function seleccionarNombre(valor){
+        var nombre = valor.value;
+
+        var req = new XMLHttpRequest();
+        req.onreadystatechange = function(){
+          if (req.readyState == 4 && req.status == 200){
+            var response = req.responseText;
+            listado = JSON.parse(response);
+
+            var contenido = "";
+            var cantidad = listado.length;
+
+            for(a=0; a<cantidad; a++){
+              contenido = contenido + "<li onclick='mostrar("+a+");'>" + listado[a].Nombre + "</li>";
+            }
+
+            document.getElementById('listanombre').innerHTML = contenido;
+          }
+        }
+
+        req.open('GET', "http://localhost:8080/seleccion2?nombre="+ nombre, true);
+        req.send();
+      }
+
+/* Cambia el fondo del área donde se muestra la info en función del color que elija el usuario */
+
+      function cambiarfondo(){
+        var fondo = document.getElementById('picker').value;
+        document.getElementById('habilidad').style.backgroundColor = fondo;
+      }
+
+/* Esta función nos muestra al gatito elegido, enseñándonos su foto, nombre, color y habilidad */
+
+      function mostrar(indice){
+        index = indice;
+        var contenido = "<input type='color' id='picker' onchange='cambiarfondo();'>"
+        contenido += "<img src='./images/" + listado[index].Imagen + "' width='400px'>";
+        contenido += "<p class='info'><strong>Nombre: </strong>" + listado[index].Nombre + "</p>";
+        contenido += "<p class='info'><strong>Color: </strong>" + listado[index].Color + "</p>";
+        contenido += "<p class='info'><strong>Habilidad: </strong>" + listado[index].Habilidad + "</p>";
+        contenido += "<button class='botoneditar' onclick='editar();'>Editar</button>";
+        contenido += "<button class='botoneditar' id='eliminar' onclick='confirmar();'>Borrar</button>";
+
+        document.getElementById('habilidad').innerHTML = contenido;
+      }
+
+/* Esta función superpone un formulario donde nos pide los datos necesarios para introducir
+ * un nuevo gatito en la base de datos
+ */
+      function insertarNuevo(){
+        document.getElementById('formularioInsertar').style.display='block';
+      }
+
+/* Esta función utiliza el formulario que hace aparecer la función insertarNuevo para
+ * insertar un nuevo gatito en la base de datos
+ */
+
+     function insertarenBase(){
+       var nombre = document.getElementById('new_nombre').value;
+       var color = document.getElementById('new_color').value;
+       var imagen = document.getElementById('new_imagen').value;
+       var habilidad = document.getElementById('new_habilidad').value;
+
+       /* Genero las queries donde van los datos de la nueva entrada */
+       var nuevoGatito = "nombre=" + nombre + "&color=" + color + "&imagen=" + imagen + "&habilidad=" + habilidad;
+
+       var req = new XMLHttpRequest();
+       req.onreadystatechange = function(){
+         if(req.readyState == 4 && req.status == 200){
+           document.getElementById('respuesta').innerHTML = req.responseText;
+         }
+       }
+       req.open("POST", "http://localhost:8080/seleccion", true);
+       /* Como estamos enviando por post, tenemos que decirle que el formulario está codificado como URL */
+       req.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+       req.send(nuevoGatito);
+     }
+
+/* Esta función muestra la información de un gatito preexistente en la base de datos en un formulario de
+ * edición. No actualiza sin la función actualizar, porque no está enviando nada a la base de datos
+ */
+
+    function editar(){
+      document.getElementById('formularioEditar').style.display='block';
+
+      document.getElementById('edit_nombre').value = listado[index].Nombre;
+      document.getElementById('edit_color').value = listado[index].Color;
+      document.getElementById('edit_imagen').value = listado[index].Imagen;
+      document.getElementById('edit_habilidad').value = listado[index].Habilidad;
+    }
+
+/* Esta función envía a la base de datos los cambios sobre un gatito preexistente, para
+ * modificarlos
+ */
+     function actualizar(){
+       var id = listado[index]._id;
+       var nombre = document.getElementById('edit_nombre').value;
+       var color = document.getElementById('edit_color').value;
+       var imagen = document.getElementById('edit_imagen').value;
+       var habilidad = document.getElementById('edit_habilidad').value;
+
+       var gatitoEditado = "id=" + id + "&nombre=" + nombre + "&color=" + color + "&imagen=" + imagen + "&habilidad=" + habilidad;
+
+       var req = new XMLHttpRequest();
+       req.onreadystatechange = function(){
+         if (req.readyState == 4 && req.status == 200){
+           document.getElementById('edit_respuesta').innerHTML = req.responseText;
+         }
+       }
+       req.open("PUT", "http://localhost:8080/seleccion", true);
+       req.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+       req.send(gatitoEditado);
+     }
+
+/* Te pregunta si estás seguro al activar la función eliminar */
+   function confirmar(){
+     document.getElementById('confirmar').style.display = 'block';
+   }
+
+/* Elimina una entrada preexistente de la base de datos */
+    function eliminar(){
+      var req = new XMLHttpRequest();
+      req.onreadystatechange = function(){
+        if (req.readyState == 4 && req.status == 200){
+          document.getElementById('mensajeConfirmar').innerHTML = req.responseText;
+        }
+      }
+      req.open('DELETE', 'http://localhost:8080/seleccion?id=' + listado[index]._id, true);
+      req.send();
+    }
+
+/* Esta función oculta el formulario superpuesto al hacer clic en la cruz de la esquina superior derecha */
+/* También recarga la página, para que se pueda acceder automáticamente a los cambios */
+
+    function cerrar(){
+      document.getElementById('formularioInsertar').style.display='none';
+      document.getElementById('formularioEditar').style.display='none';
+      document.getElementById('confirmar').style.display='none';
+
+      location.reload();
+    }
+
+/* ==== Uploader - Para subir fotos de los gatitos ==== */
+
+/* Esta función llama tanto al formulario que nos permite insertar una nueva entrada como la función que nos permite
+ * guardar una imagen en la carpeta Images dentro de public
+ */
+      function ActMasEnviar(){
+        insertarenBase();
+        Enviar();
+      }
+
+/* Esta función guarda la imagen elegida por el usuario en la carpeta Images dentro de public */
+
+      function Enviar(){
+
+        var archivo = document.getElementById("ipt-archivo").files[0];
+        var nombre = document.getElementById("new_imagen").value;
+
+        var formData = new FormData();
+
+        formData.append("nombre", nombre);
+        formData.append("file", archivo);
+
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function()
+        {
+          if (xmlHttp.readyState === 4 && xmlHttp.status === 200)
+          {
+            document.getElementById("opt-respuesta").innerHTML = xmlHttp.responseText;
+          }
+        }
+        xmlHttp.open("POST", "http://localhost:8080/upload", true);
+        xmlHttp.send(formData);
+      }
+
+/* Esta función procesa la imagen para poder guardarla. También pone su nombre en el campo "Imagen" del formulario */
+
+      function procesarArchivo(ev){
+        var files = ev.target.files;
+
+        var reader = new FileReader();
+        reader.onloadend = function(){
+          document.getElementById('ipt-archivo').style.backgroundImage = "url('" + reader.result + "')";
+        };
+        reader.readAsDataURL(files[0]);
+        document.getElementById('new_imagen').value = files[0].name;
+      }
+
+  </script>
