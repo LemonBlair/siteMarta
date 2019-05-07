@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body onload = "sesion();">
+    <a href="./index.html">Formulario</a>
+    <a href="./pagina02.html">Página 02</a>
+    <div id="respuesta"></div>
+  </body>
+  <script type="text/javascript">
+    function sesion(){
+      var req = new XMLHttpRequest();
+      req.onreadystatechange = function(){
+        if (req.readyState == 4 && req.status == 200){
+          document.getElementById('respuesta').innerHTML= req.responseText;
+        }
+      }
+      req.open("GET","http://localhost:8080/sesion", true);
+      req.send();
+    }
+  </script>
+</html>

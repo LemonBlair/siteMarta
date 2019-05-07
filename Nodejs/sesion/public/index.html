@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <header>
+      <h1>Sesión</h1>
+    </header>
+    <p>Nombre:</p><input type="text" id="nombre">
+    <p>Email:</p><input type="email" id="email">
+    <p>Contraseña:</p><input type="password" id="password">
+    <div id="respuesta"></div>
+    <button type="button" name="button" onclick="login();">Log in</button>
+    <button type="button" name="button" onclick="logout();">Log out</button>
+    <a href="./pagina01.html">Pagina 01</a>
+    <a href="./pagina02.html">Página 02</a>
+  </body>
+  <script type="text/javascript">
+
+    function login(){
+      if (document.getElementById('nombre').value !== ""){
+        var nombre = document.getElementById('nombre').value;
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
+
+        var usuario = "nombre=" + nombre + "&email=" + email + "&password=" + password;
+
+        var req = new XMLHttpRequest();
+        req.onreadystatechange = function(){
+          if (req.readyState == 4 && req.status == 200){
+            document.getElementById('respuesta').innerHTML = req.responseText;
+          }
+        }
+        req.open("POST", "http://localhost:8080/login", true);
+        req.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+        req.send(usuario);
+      }
+    }
+
+    function logout(){
+      var req = new XMLHttpRequest();
+      req.onreadystatechange = function(){
+        if (req.readyState == 4 && req.status == 200){
+          document.getElementById('respuesta').innerHTML = req.responseText;
+        }
+      }
+      req.open("POST", "http://localhost:8080/logout", true);
+      req.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+      req.send();
+    }
+
+  </script>
+</html>
